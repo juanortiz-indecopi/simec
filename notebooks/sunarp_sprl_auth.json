@@ -2,20 +2,20 @@
   "cookies": [
     {
       "name": "_ga",
-      "value": "GA1.1.411313321.1794799085",
+      "value": "GA1.1.310242177.1794837579",
       "domain": ".sunarp.gob.pe",
       "path": "/",
-      "expires": 1829359084.948948,
+      "expires": 1829397578.737204,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "_ga_C4XX4CF718",
-      "value": "GS2.1.s1794799084$o1$g1$t1794801738$j2$l0$h0",
+      "value": "GS2.1.s1794837578$o1$g1$t1794838168$j60$l0$h0",
       "domain": ".sunarp.gob.pe",
       "path": "/",
-      "expires": 1829361738.108874,
+      "expires": 1829398168.337139,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -55,7 +55,7 @@
         },
         {
           "name": "ctc",
-          "value": "U2FsdGVkX18tvOEDknUTD1e9nBJa9WxvjBZpk8+9JJc="
+          "value": "U2FsdGVkX1+NCcpBiBoC/+Kc/0pRbKvCX1ozBRjsLc0="
         },
         {
           "name": "saldoAux",
@@ -63,7 +63,7 @@
         },
         {
           "name": "sunarp-refresh-id",
-          "value": "ffd1bbd1-1c0e-45ee-8158-3d3ce63e0312-9853aa51-78b0-4e84-8460-2fa0875602c0-2602527b-d0cc-4ebc-88d4-01246766872a"
+          "value": "ece584b4-f6e2-47d2-aa9a-0c016cd10c10-794403d9-38fb-4ece-988a-0142604f6344-97ad73ca-4414-48d1-b12b-c344f4dc9d15"
         },
         {
           "name": "perfilId",
@@ -75,7 +75,7 @@
         },
         {
           "name": "sunarp-sesion-id",
-          "value": "3bcf3cf0-89e2-4688-b63e-e613588a7c3f-9c86a305-790e-4969-a704-573d4fef2755"
+          "value": "fdc21a6b-47f1-4b64-a680-3f51cd82e758-d804293f-1537-4618-bcee-a0f62be0d370"
         },
         {
           "name": "menu",
@@ -96,7 +96,7 @@
       "localStorage": [
         {
           "name": "cf.turnstile.u",
-          "value": "Ci1Xb0YWE1m2nSXNFYK0GuIqYPNAymSg5z5jZBkNM3T5dYeVUWPL3EKM-DamxnR9Fzh69vyox0zzrjf9_s9MfOkTW_HGpaEn6rqUDzPlcw"
+          "value": "Cj9rJyy9yiqLdWd1UAKmLirP8fVb3AybMael5RFibxlMMJ7hjbAUNzozzwfqrUTa2kmpwod8P0JeWaHQtRsOLt966ghXha6nfN9j8ZRlWQ"
         }
       ]
     }

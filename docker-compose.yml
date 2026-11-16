@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: simec-sunarp-api
+    ports:
+      - "8000:8000"
+    environment:
+      - SUNARP_USER=MYUSER123 
+      - SUNARP_PASS=BU&VQESCG9
+    restart: unless-stopped

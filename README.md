@@ -111,3 +111,20 @@ Si instalas nuevas librerías durante el desarrollo con `pip install <paquete>`,
 ```bash
 pip freeze > requirements.txt
 ```
+
+### Configuración del entorno para CONDA
+
+```bash
+# Crear y activar el entorno aislado
+conda create -n simec-ocr python=3.11 -y
+conda activate simec-ocr
+
+# Instalar las dependencias del proyecto y el motor para Jupyter
+pip install -r requirements.txt ipykernel
+
+# Descargar el navegador Chromium necesario para Playwright
+playwright install chromium
+
+# Vincular el entorno de Conda para que VS Code y Jupyter lo reconozcan
+python -m ipykernel install --user --name=simec-ocr --display-name="Python 3.11 (SIMEC-OCR)"
+```
