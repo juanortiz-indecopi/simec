@@ -1,0 +1,92 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - img "logo sunarp" [ref=e11]
+        - img "logo servicio" [ref=e13]
+      - navigation "Menú principal" [ref=e14]:
+        - link [ref=e15] [cursor=pointer]:
+          - /url: /sprl/ingreso
+          - img "home" [ref=e16]
+          - text: Inicio
+        - list [ref=e19]:
+          - listitem [ref=e20]:
+            - link "TARIFAS" [ref=e21] [cursor=pointer]:
+              - /url: /sprl/tarifas
+          - listitem [ref=e22]:
+            - generic [ref=e23] [cursor=pointer]: CONTÁCTENOS
+          - listitem [ref=e24]:
+            - link "AYUDA" [ref=e25] [cursor=pointer]:
+              - /url: /sprl/ayuda
+          - listitem [ref=e26]:
+            - link [ref=e27] [cursor=pointer]:
+              - /url: https://www.sunarp.gob.pe/seccion/institucional/oficinas/index.asp
+              - text: NUESTRAS OFICINAS
+              - img "export" [ref=e28]
+    - generic [ref=e32]:
+      - generic [ref=e40]:
+        - generic [ref=e43]:
+          - paragraph [ref=e44]: Podrás acceder, a nivel nacional, al contenido de las partidas registrales inscritas en los Registros Públicos y realizar búsquedas en los diferentes registros, obteniendo además publicidad simple y certificada. También podrás realizar tu trámite de reserva de nombre y pagar los derechos en línea, mediante monedero virtual o con cualquier tarjeta de crédito o débito.
+          - paragraph [ref=e45]: Si no estás suscrito a este servicio, también puedes acceder a la información registral en cualquiera de nuestras oficinas.
+        - generic [ref=e52]:
+          - paragraph [ref=e53]: USUARIOS REGISTRADOS
+          - paragraph [ref=e54]: Acceso a Publicidad Registral en Línea
+          - generic [ref=e55]:
+            - button "INGRESAR arrow-right" [ref=e56] [cursor=pointer]:
+              - generic [ref=e57]: INGRESAR
+              - img "arrow-right" [ref=e58]
+            - generic [ref=e61] [cursor=pointer]: ¿Olvidó Contraseña?
+          - paragraph [ref=e63]:
+            - text: Si no tienes cuenta,
+            - strong [ref=e64]: SUSCRÍBETE
+            - text: "aquí gratuitamente:"
+          - generic [ref=e65]:
+            - button [ref=e66] [cursor=pointer]:
+              - img "Suscripción de personas naturales" [ref=e67]
+            - button [ref=e68] [cursor=pointer]:
+              - img "Suscripción de personas jurídicas y entidades públicas" [ref=e69]
+      - generic [ref=e72]:
+        - generic [ref=e74]:
+          - generic [ref=e75]: "Servicios recomendados:"
+          - generic [ref=e77]:
+            - link [ref=e79] [cursor=pointer]:
+              - /url: https://siguelo.sunarp.gob.pe/siguelo/?ref=webprtl
+              - img "Síguelo Plus" [ref=e80]
+            - link [ref=e82] [cursor=pointer]:
+              - /url: https://conoce-aqui.sunarp.gob.pe/conoce-aqui/inicio
+              - img "Conoce Aquí" [ref=e83]
+            - link [ref=e85] [cursor=pointer]:
+              - /url: https://visor-bgr.sunarp.gob.pe
+              - img "Base Gráfica Registral" [ref=e86]
+            - link [ref=e88] [cursor=pointer]:
+              - /url: https://sprl.sunarp.gob.pe/sprl/consulta-tramites/verificar-certificado
+              - img "Otros Servicios" [ref=e89]
+        - generic [ref=e96]:
+          - link "PRIVACIDAD Y SEGURIDAD" [ref=e98] [cursor=pointer]:
+            - /url: /sprl/privacidad-seguridad
+          - link "TERMINOS Y CONDICIONES" [ref=e100] [cursor=pointer]:
+            - /url: /sprl/terminos-condiciones
+          - button "NAVEGADORES COMPATIBLES" [ref=e102] [cursor=pointer]
+    - contentinfo [ref=e104]:
+      - generic [ref=e105]:
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: "Central telefónica: (01) 208-3100"
+            - paragraph [ref=e110]:
+              - text: "Mayor información: ALÓ Sunarp (línea gratuita):"
+              - strong [ref=e111]: 0800-27164
+            - paragraph [ref=e112]:
+              - link "consultas@sunarp.gob.pe" [ref=e113] [cursor=pointer]:
+                - /url: ""
+          - paragraph [ref=e114]: © 2023-Superintendencia Nacional de los Registros Públicos 2.0.0
+        - link [ref=e116] [cursor=pointer]:
+          - /url: https://reclamos.servicios.gob.pe/?institution_id=216
+          - img "libro reclamaciones SUNARP" [ref=e117]
+  - dialog [ref=e120]:
+    - document:
+      - generic [ref=e121]:
+        - button "Close" [active] [ref=e122] [cursor=pointer]:
+          - img "close" [ref=e124]
+        - link [ref=e129] [cursor=pointer]:
+          - /url: https://www.sunarp.gob.pe/serviciosenlinea/portal/index.html
+          - img "Descripción de la imagen" [ref=e130]

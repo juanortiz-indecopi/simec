@@ -1,0 +1,187 @@
+- generic [ref=f11e4]:
+  - generic [ref=f11e9]:
+    - generic [ref=f11e12]:
+      - link "Privacidad y Seguridad |" [ref=f11e15] [cursor=pointer]:
+        - /url: /sprl/privacidad-seguridad
+      - link "Ayuda |" [ref=f11e18] [cursor=pointer]:
+        - /url: /sprl/ayuda
+      - link "Términos y Condiciones |" [ref=f11e21] [cursor=pointer]:
+        - /url: /sprl/terminos-condiciones
+      - generic [ref=f11e22]: Contáctenos |
+      - link "Tarifas |" [ref=f11e26] [cursor=pointer]:
+        - /url: /sprl/tarifas
+      - link "Inicio" [ref=f11e29] [cursor=pointer]:
+        - /url: /sprl/ingreso
+    - generic [ref=f11e31]:
+      - generic [ref=f11e32]:
+        - img "user" [ref=f11e34]
+        - generic [ref=f11e37]: MYUSER123
+      - generic [ref=f11e38]:
+        - generic [ref=f11e39]: Saldo
+        - generic [ref=f11e40]: S/ 0.00
+  - generic [ref=f11e41]:
+    - generic [ref=f11e42]:
+      - generic [aria-hidden] [ref=f11e43]: LF
+      - generic [ref=f11e44]:
+        - paragraph [ref=f11e45]:
+          - text: ¡Hola,
+          - strong [ref=f11e46]: Luis Fernando Chumbes Ramos
+          - text: "!"
+        - paragraph [ref=f11e47]:
+          - text: Usuario
+          - strong [ref=f11e48]: MYUSER123
+          - text: · Individual Externo
+    - generic [ref=f11e49]:
+      - paragraph [ref=f11e50]: SALDO DISPONIBLE
+      - paragraph [ref=f11e51]: S/ 0.00 Soles
+  - generic [ref=f11e53]:
+    - paragraph [ref=f11e54]: "BUSCAR SERVICIOS:"
+    - textbox "Escriba el servicio requerido..." [ref=f11e55]
+  - button [ref=f11e57] [cursor=pointer]:
+    - img "close" [ref=f11e58]
+  - generic [ref=f11e66]:
+    - list [ref=f11e70]:
+      - listitem [ref=f11e71]:
+        - generic [ref=f11e72] [cursor=pointer]:
+          - img "icons:Icono-Tram-Publici-Reg-a" [ref=f11e73]
+          - generic [ref=f11e76]: TRÁMITE DE PUBLICIDAD REGISTRAL
+        - list [ref=f11e78]:
+          - listitem [ref=f11e79] [cursor=pointer]:
+            - generic [ref=f11e80]: Solicitar publicidad certificada (vigencias, CRI, etc)
+          - listitem [ref=f11e81] [cursor=pointer]:
+            - generic [ref=f11e82]: Solicitar base gráfica registral (BGR)
+          - listitem [ref=f11e83] [cursor=pointer]:
+            - generic [ref=f11e84]: Copia Informativa de Titulo Archivado
+          - listitem [ref=f11e85] [cursor=pointer]:
+            - generic [ref=f11e86]: Solicitar certificado literal de partida(copia literal)
+          - listitem [ref=f11e87] [cursor=pointer]:
+            - generic [ref=f11e88]: Servicios del índice de verificadores (inscripción, actualización y cambio de voluntario de credencial)
+          - listitem [ref=f11e89] [cursor=pointer]:
+            - generic [ref=f11e90]: Solicitar Boleta Informativa de Vehículo
+          - listitem [ref=f11e91] [cursor=pointer]:
+            - generic [ref=f11e92]: Certificado literal de título archivado / Visualizar
+          - listitem [ref=f11e93] [cursor=pointer]:
+            - generic [ref=f11e94]: Búsqueda de índice
+          - listitem [ref=f11e95] [cursor=pointer]:
+            - generic [ref=f11e96]: Consulta en el índice nacional de sucesión intestada / de testamento
+          - listitem [ref=f11e97] [cursor=pointer]:
+            - generic [ref=f11e98]: Consulta en el índice nacional del registro personal
+          - listitem [ref=f11e99] [cursor=pointer]:
+            - generic [ref=f11e100]: Consulta en el índice nacional de personas jurídicas
+          - listitem [ref=f11e101] [cursor=pointer]:
+            - generic [ref=f11e102]: Visualización e impresión de partida
+          - listitem [ref=f11e103] [cursor=pointer]:
+            - generic [ref=f11e104]: Consulta el índice nacional de registro de mandatos y poderes
+      - listitem [ref=f11e105]:
+        - generic [ref=f11e106] [cursor=pointer]:
+          - img "icons:Icono-inscTrami-a" [ref=f11e107]
+          - generic [ref=f11e110]: TRÁMITE DE INSCRIPCION DE TÍTULOS
+        - list [ref=f11e112]:
+          - listitem [ref=f11e113] [cursor=pointer]:
+            - generic [ref=f11e114]: Consulta de solicitud de inscripción en línea
+      - listitem [ref=f11e115]:
+        - generic [ref=f11e116] [cursor=pointer]:
+          - img "icons:Icono-seguimi-a" [ref=f11e117]
+          - generic [ref=f11e120]: SEGUIMIENTO DE TRÁMITES
+        - list [ref=f11e122]:
+          - listitem [ref=f11e123] [cursor=pointer]:
+            - generic [ref=f11e124]: Consulta el estado de la solicitud de publicidad
+          - listitem [ref=f11e125] [cursor=pointer]:
+            - generic [ref=f11e126]: Consulta de estado de titulos para pago de liquidación
+      - listitem [ref=f11e127]:
+        - generic [ref=f11e128] [cursor=pointer]:
+          - img "icons:Icono-Prepagar-a" [ref=f11e129]
+          - generic [ref=f11e132]: PREPAGAR
+        - list [ref=f11e134]:
+          - listitem [ref=f11e135] [cursor=pointer]:
+            - generic [ref=f11e136]: Recarga de saldo
+      - listitem [ref=f11e137]:
+        - generic [ref=f11e138] [cursor=pointer]:
+          - img "icons:Icono-Datos-Pers-a" [ref=f11e139]
+          - generic [ref=f11e142]: DATOS PERSONALES
+        - list [ref=f11e144]:
+          - listitem [ref=f11e145] [cursor=pointer]:
+            - generic [ref=f11e146]: Editar Datos Personales
+      - listitem [ref=f11e147]:
+        - generic [ref=f11e148] [cursor=pointer]:
+          - img "icons:Icono-ManoEngranaje-Adm-Org-a" [ref=f11e149]
+          - generic [ref=f11e152]: REPORTES
+        - list [ref=f11e154]:
+          - listitem [ref=f11e155] [cursor=pointer]:
+            - generic [ref=f11e156]: Reporte de trámites realizados
+          - listitem [ref=f11e157] [cursor=pointer]:
+            - generic [ref=f11e158]: Reporte de recarga de saldo
+    - generic [ref=f11e159]:
+      - generic [ref=f11e160]: SERVICIOS / VISUALIZACIÓN E IMPRESIÓN DE PARTIDA
+      - generic [ref=f11e168]:
+        - heading "Visualización e impresión de partida" [level=6] [ref=f11e170]
+        - generic [ref=f11e177]:
+          - generic [ref=f11e179]:
+            - generic [ref=f11e185]:
+              - generic [ref=f11e186]: "Oficina Registral* :"
+              - generic [ref=f11e191] [cursor=pointer]:
+                - generic [ref=f11e193]:
+                  - textbox [ref=f11e195]
+                  - generic: "--[Seleccione una opción]--"
+                - img "down" [ref=f11e196]
+            - generic [ref=f11e199]: Ayuda - ¿Cuál es mi oficina? click aquí.
+          - generic [ref=f11e204]:
+            - generic [ref=f11e210]:
+              - generic [ref=f11e211]: "Area registral :"
+              - generic [ref=f11e216] [cursor=pointer]:
+                - generic [ref=f11e218]:
+                  - textbox [ref=f11e220]
+                  - generic "Propiedad Inmueble Predial" [ref=f11e221]
+                - img "down" [ref=f11e222]
+            - strong [ref=f11e226]: COSTO POR BUSQUEDA 0
+          - generic [ref=f11e228]:
+            - img "info-circle" [ref=f11e230]
+            - generic [ref=f11e233]: "Las partidas que inician con la letra P deberán consignarse de la siguiente manera: P123456789"
+          - generic [ref=f11e235]:
+            - generic [ref=f11e236]: Búsqueda Directa por Número de Partida o de Ficha
+            - generic [ref=f11e239]:
+              - generic [ref=f11e240]:
+                - generic [ref=f11e241]: "Buscar por *:"
+                - generic [ref=f11e243]:
+                  - generic [ref=f11e244] [cursor=pointer]:
+                    - radio "Ficha" [checked] [ref=f11e246]
+                    - generic [ref=f11e248]: Ficha
+                  - generic [ref=f11e249] [cursor=pointer]:
+                    - radio "Partida" [ref=f11e251]
+                    - generic [ref=f11e253]: Partida
+              - generic [ref=f11e255]:
+                - generic [ref=f11e256]: "Número: * :"
+                - 'textbox "Número: * : Folio: * :" [ref=f11e264]':
+                  - /placeholder: Escriba aqui...
+                - generic [ref=f11e270]:
+                  - img "sync" [ref=f11e273] [cursor=pointer]
+                  - generic [ref=f11e281]:
+                    - img "number" [ref=f11e283]
+                    - textbox "Valor de la imagen" [ref=f11e286]
+                - button "search Buscar" [disabled] [ref=f11e288]:
+                  - img "search"
+                  - generic: Buscar
+          - generic [ref=f11e291]:
+            - generic [ref=f11e292]: Búsqueda Directa por Tomo/Folio
+            - generic [ref=f11e295]:
+              - generic [ref=f11e298]:
+                - generic [ref=f11e299]: "Registro de * :"
+                - generic [ref=f11e304] [cursor=pointer]:
+                  - generic [ref=f11e306]:
+                    - textbox [ref=f11e308]
+                    - generic: Seleccione una opción
+                  - img "down" [ref=f11e309]
+              - generic [ref=f11e315]:
+                - generic [ref=f11e316]: "Tomo * :"
+                - textbox "Escriba aquí..." [ref=f11e321]
+              - generic [ref=f11e323]:
+                - generic [ref=f11e324]: "Folio: * :"
+                - textbox "Escriba aqui..." [ref=f11e332]
+                - generic [ref=f11e338]:
+                  - img "sync" [ref=f11e341] [cursor=pointer]
+                  - generic [ref=f11e349]:
+                    - img "number" [ref=f11e351]
+                    - textbox "Valor de la imagen" [ref=f11e354]
+                - button "search Buscar" [disabled] [ref=f11e356]:
+                  - img "search"
+                  - generic: Buscar
