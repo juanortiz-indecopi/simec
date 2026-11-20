@@ -1,5 +1,7 @@
 import json
 import re
+from collections.abc import Callable
+from datetime import timedelta
 from typing import Literal
 
 from langchain_core.language_models import BaseChatModel
@@ -103,12 +105,19 @@ JS_SELECCIONAR = """async (page) => {
   }
   await page.waitForTimeout(700);
   const items = page.locator('nz-option-item');
-  const n = await items.count();
-  let pick = -1;
-  for (let i = 0; i < n; i++) {
-    const t = norm((await items.nth(i).getAttribute('title')) || (await items.nth(i).innerText()));
-    if (t === target) { pick = i; break; }
-    if (pick < 0 && t.includes(target)) pick = i;
+  // La lista es virtual (solo renderiza las opciones visibles): si no aparece, se desplaza y reintenta.
+  const viewport = page.locator('cdk-virtual-scroll-viewport, .ant-select-dropdown .rc-virtual-list-holder').first();
+  let pick = -1, n = 0;
+  for (let paso = 0; paso < 8 && pick < 0; paso++) {
+    n = await items.count();
+    for (let i = 0; i < n; i++) {
+      const t = norm((await items.nth(i).getAttribute('title')) || (await items.nth(i).innerText()));
+      if (t === target) { pick = i; break; }
+      if (pick < 0 && t.includes(target)) pick = i;
+    }
+    if (pick >= 0 || await viewport.count() === 0) break;
+    await viewport.evaluate(el => { el.scrollTop += el.clientHeight * 0.8; });
+    await page.waitForTimeout(400);
   }
   if (pick < 0) throw new Error('No existe la opcion "' + wanted + '" (' + n + ' opciones visibles)');
   await items.nth(pick).evaluate(el => el.click());
@@ -151,7 +160,7 @@ def crear_herramienta_desplegable(session: ClientSession) -> BaseTool:
             campo: "oficina" o "area".
             texto: nombre de la opción, p.ej. "CUSCO" o "Personas Juridicas".
         """
-        if not re.fullmatch(r"[\w .\-áéíóúñÁÉÍÓÚÑ]{1,60}", texto):
+        if not re.fullmatch(r"[\w .\-()áéíóúñÁÉÍÓÚÑ]{1,100}", texto):
             return "ERROR: texto de opción inválido."
         codigo = JS_SELECCIONAR % {"idx": CAMPOS_DESPLEGABLE[campo], "wanted": json.dumps(texto)}
         try:
@@ -160,6 +169,98 @@ def crear_herramienta_desplegable(session: ClientSession) -> BaseTool:
             return f"ERROR: {exc}"
 
     return seleccionar_desplegable
+
+
+# Síguelo Plus: el botón "ojo" de cada fila abre una pestaña blob: con el PDF ya descifrado (la API
+# lo entrega cifrado con AES de CryptoJS). El LLM no puede leer un blob, así que esta parte es una
+# herramienta fija: abre cada fila, lee el blob desde la pestaña que lo creó y lo devuelve en base64
+# (el sandbox de browser_run_code_unsafe no tiene `require` para escribir archivos).
+JS_DESCARGAR_ASIENTOS = r"""async (page) => {
+  const ctx = page.context();
+  const filas = page.locator('mat-dialog-container tbody tr');
+  try {
+    await filas.first().waitFor({ state: 'visible', timeout: 15000 });
+  } catch (e) {
+    return { documents: [], fallos: ['el modal "Asientos de Inscripción" no está abierto o no lista partidas'] };
+  }
+  const documents = [], fallos = [];
+  const total = await filas.count();
+  for (let i = 0; i < total; i++) {
+    const fila = filas.nth(i);
+    const celdas = await fila.locator('td').allInnerTexts();
+    const partida = (celdas[1] || '').trim() || ('fila' + (i + 1));
+    const ojo = fila.locator('button').first();
+    if (await ojo.count() === 0) { fallos.push(partida + ': sin botón de visualización'); continue; }
+    try {
+      const popupPromesa = ctx.waitForEvent('page', { timeout: 120000 });
+      await ojo.click({ timeout: 10000 });
+      const popup = await popupPromesa;
+      await popup.waitForURL(/^blob:/, { timeout: 30000 }).catch(() => {});
+      const url = popup.url();
+      const leer = async (pagina) => pagina.evaluate(async (u) => {
+        const blob = await (await fetch(u)).blob();
+        const dataUrl = await new Promise((ok, ko) => {
+          const r = new FileReader();
+          r.onload = () => ok(r.result);
+          r.onerror = () => ko(r.error);
+          r.readAsDataURL(blob);
+        });
+        return { b64: dataUrl.slice(dataUrl.indexOf(',') + 1), size: blob.size };
+      }, url);
+      let pdf;
+      try { pdf = await leer(page); } catch (e) { pdf = await leer(popup); }
+      await popup.close().catch(() => {});
+      documents.push({ partida, b64: pdf.b64, size: pdf.size });
+    } catch (e) {
+      fallos.push(partida + ': ' + String((e && e.message) || e).split('\n')[0].slice(0, 160));
+    }
+  }
+  for (const p of ctx.pages()) if (p !== page) await p.close().catch(() => {});
+  return { documents, fallos };
+}"""
+
+_RESULT_RE = re.compile(r"### Result\s*\n(.*?)(?:\n### |\Z)", re.DOTALL)
+
+
+def crear_herramienta_descarga_asientos(
+    session: ClientSession, al_descargar: Callable[[list[dict]], list[dict]]
+) -> BaseTool:
+    """Descarga los PDF del modal "Asientos de Inscripción" de Síguelo Plus.
+
+    `al_descargar` recibe [{partida, b64, size}], persiste los PDF y devuelve lo guardado.
+    """
+
+    @tool
+    async def descargar_asientos_inscripcion() -> str:
+        """Descarga y guarda el PDF de cada partida del modal "Asientos de Inscripción".
+
+        Úsala cuando el modal "Asientos de Inscripción" esté abierto. No requiere argumentos:
+        pulsa por sí misma el botón del ojo de cada fila y guarda los PDF.
+        """
+        try:
+            res = await session.call_tool(
+                "browser_run_code_unsafe",
+                {"code": JS_DESCARGAR_ASIENTOS},
+                read_timeout_seconds=timedelta(seconds=300),
+            )
+            texto = "\n".join(getattr(c, "text", "") for c in res.content)
+            if _hay_error(res) or "### Error" in texto:
+                return f"ERROR: {' '.join(texto.split())[:300]}"
+            m = _RESULT_RE.search(texto)
+            if not m:
+                return "ERROR: la herramienta no devolvió resultado."
+            datos = json.loads(m.group(1).strip())
+            guardados = al_descargar(datos.get("documents") or [])
+            fallos = datos.get("fallos") or []
+            if not guardados:
+                return "ERROR: no se obtuvo ningún PDF. " + " | ".join(fallos)
+            partidas = ", ".join(g["partida"] for g in guardados)
+            extra = (" Fallos: " + " | ".join(fallos)) if fallos else ""
+            return f"OK: {len(guardados)} PDF guardado(s) (partidas: {partidas}).{extra}"
+        except Exception as exc:
+            return f"ERROR: {type(exc).__name__}: {exc}"
+
+    return descargar_asientos_inscripcion
 
 
 def crear_herramienta_captcha(session: ClientSession, modelo_vision: BaseChatModel) -> BaseTool:

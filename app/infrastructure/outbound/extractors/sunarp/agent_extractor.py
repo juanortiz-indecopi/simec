@@ -17,6 +17,7 @@ from langchain_mcp_adapters.tools import load_mcp_tools
 
 from app.application.port.out.sunarp_port import SunarpPort
 from app.domain.models.audit import AuditResult, AuditStatus
+from app.domain.models.sunarp import normalizar_area
 from app.infrastructure.outbound.extractors.shared.browser import run_isolated
 from app.infrastructure.outbound.extractors.sunarp.agent_runtime import (
     crear_modelo,
@@ -29,6 +30,10 @@ from app.infrastructure.outbound.extractors.sunarp.prompts import (
     MARCA_SIN_RESULTADOS,
     SYSTEM_PROMPT,
     construir_tarea_consulta,
+)
+from app.infrastructure.outbound.extractors.sunarp.siguelo import (
+    descargar_asientos_siguelo,
+    directorio_archivos,
 )
 from app.infrastructure.outbound.extractors.sunarp.tools import (
     crear_herramienta_captcha,
@@ -69,7 +74,7 @@ def _validar_parametros(oficina: str, area: str, partida: str) -> None:
     # Los valores se insertan en el prompt del agente: se restringen para evitar inyección.
     if not TEXTO_PATTERN.match(oficina or ""):
         raise ValueError("Oficina registral inválida.")
-    if not TEXTO_PATTERN.match(area or ""):
+    if normalizar_area(area) != area:
         raise ValueError("Área registral inválida.")
     if not PARTIDA_PATTERN.match(partida or ""):
         raise ValueError("Número de partida inválido.")
@@ -86,6 +91,9 @@ class SunarpAgentExtractor(SunarpPort):
         self.headless = os.getenv("SUNARP_HEADLESS", "false").lower() == "true"
         # Un perfil persistente solo admite un navegador a la vez: no ejecutar consultas en paralelo.
         self.user_data_dir = os.getenv("SUNARP_AGENT_PROFILE_DIR", os.path.join(".cache", "sunarp_mcp_profile"))
+        # Descarga de asientos de inscripción (PDF) por título en Síguelo Plus.
+        self.siguelo_habilitado = os.getenv("SUNARP_SIGUELO_ENABLED", "true").lower() == "true"
+        self.files_dir = directorio_archivos()
 
     @property
     def source_name(self) -> str:
@@ -108,6 +116,8 @@ class SunarpAgentExtractor(SunarpPort):
         titulos: list[dict[str, str]] = []
         estado = AuditStatus.ERROR
         lock_tomado = False
+        sprl_ms: int | None = None
+        auditorias_extra: list[AuditResult] = []
 
         try:
             _validar_parametros(oficina, area, partida)
@@ -146,6 +156,14 @@ class SunarpAgentExtractor(SunarpPort):
                     estado = AuditStatus.SUCCESS if titulos else AuditStatus.NO_DATA
                     if not titulos:
                         detalles = "La Lista de Asientos no contiene títulos legibles."
+                    elif self.siguelo_habilitado:
+                        # Paso determinista (sin LLM) en el mismo navegador: PDF de cada título.
+                        sprl_ms = int((time.perf_counter() - started) * 1000)
+                        titulos, audit_siguelo = await descargar_asientos_siguelo(
+                            session, oficina, partida, titulos,
+                            files_dir=self.files_dir, log=self._registrar,
+                        )
+                        auditorias_extra.append(audit_siguelo)
                 else:
                     detalles = final or (
                         f"{MARCA_FALLIDA}: el agente no terminó dentro de {self.max_pasos} pasos."
@@ -162,10 +180,11 @@ class SunarpAgentExtractor(SunarpPort):
             "audit": AuditResult(
                 source_name=self.SOURCE_NAME,
                 query_parameter=f"{oficina} | {area} | {partida}",
-                duration_ms=int((time.perf_counter() - started) * 1000),
+                duration_ms=sprl_ms if sprl_ms is not None else int((time.perf_counter() - started) * 1000),
                 status=estado,
                 details=detalles,
                 executed_at_utc=datetime.now(timezone.utc),
             ),
+            "additional_audits": auditorias_extra,
             "data": {"seats": titulos},
         }

@@ -1,2 +1,5 @@
-2026/11/19-21:37:18.293 4248 Creating DB C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage since it was missing.
-2026/11/19-21:37:18.310 4248 Reusing MANIFEST C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/MANIFEST-000001
+2026/11/19-22:56:47.642 43ec Reusing MANIFEST C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/MANIFEST-000001
+2026/11/19-22:56:47.643 43ec Recovering log #3
+2026/11/19-22:56:47.644 43ec Reusing old log C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/000003.log 
+2026/11/19-23:18:50.436 6fdc Level-0 table #5: started
+2026/11/19-23:18:50.444 6fdc Level-0 table #5: 18482 bytes OK

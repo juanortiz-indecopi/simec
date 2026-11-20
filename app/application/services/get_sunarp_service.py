@@ -8,7 +8,12 @@ from app.application.port.out.sunarp_port import SunarpPort
 from app.application.port.usecase.get_sunarp_use_case import GetSunarpUseCase
 from app.application.services.source_runner import DEFAULT_TIMEOUT_S
 from app.domain.models.audit import AuditResult, AuditStatus
-from app.domain.models.sunarp import SunarpRecord, SunarpSeat
+from app.domain.models.sunarp import (
+    SunarpDocumentStatus,
+    SunarpRecord,
+    SunarpSeat,
+    SunarpSeatDocument,
+)
 
 
 class GetSunarpService(GetSunarpUseCase):
@@ -19,6 +24,25 @@ class GetSunarpService(GetSunarpUseCase):
     ) -> None:
         self._sunarp = sunarp
         self._timeout_s = timeout_s
+
+    @staticmethod
+    def _to_seat(s: dict) -> SunarpSeat:
+        status = s.get("document_status")
+        return SunarpSeat(
+            year=s["year"],
+            number=s["number"],
+            original_text=s["original_text"],
+            documents=tuple(
+                SunarpSeatDocument(
+                    partida=d["partida"],
+                    file_path=d["file_path"],
+                    size_bytes=d["size_bytes"],
+                )
+                for d in s.get("documents", ())
+            ),
+            document_status=SunarpDocumentStatus(status) if status else None,
+            document_detail=s.get("document_detail"),
+        )
 
     async def execute(self, command: GetSunarpCommand) -> SunarpResult:
         started = time.perf_counter()
@@ -37,22 +61,19 @@ class GetSunarpService(GetSunarpUseCase):
             
             record = None
             if data and "seats" in data and data["seats"]:
-                seats_tuple = tuple(
-                    SunarpSeat(
-                        year=s["year"], 
-                        number=s["number"], 
-                        original_text=s["original_text"]
-                    )
-                    for s in data["seats"]
-                )
+                seats_tuple = tuple(self._to_seat(s) for s in data["seats"])
                 record = SunarpRecord(partida=command.partida, seats=seats_tuple)
+
+            extra_audits = tuple(
+                a for a in response.get("additional_audits", ()) if isinstance(a, AuditResult)
+            )
 
             return SunarpResult(
                 oficina=command.oficina,
                 area=command.area,
                 partida=command.partida,
                 record=record,
-                audit_entries=(audit,),
+                audit_entries=(audit, *extra_audits),
             )
             
         except Exception as exc:

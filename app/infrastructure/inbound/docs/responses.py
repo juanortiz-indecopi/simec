@@ -15,6 +15,22 @@ COMPANY_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     },
 }
 
+SUNARP_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
+    status.HTTP_200_OK: {
+        "description": (
+            "Consulta procesada. Revise `audit_entries` (`SUNARP_SPRL` y `SUNARP_SIGUELO`) y el "
+            "`document_status` de cada asiento para ver qué PDFs se obtuvieron."
+        )
+    },
+    status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        "description": "`oficina`, `area` o `partida` faltan o tienen un formato inválido."
+    },
+    status.HTTP_500_INTERNAL_SERVER_ERROR: {
+        "model": ErrorResponse,
+        "description": "Error inesperado al consultar SUNARP.",
+    },
+}
+
 PERSON_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     status.HTTP_200_OK: {
         "description": "Reporte generado. Revise `audit_entries` para ver el estado de cada fuente."

@@ -1,8 +1,9 @@
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 
+from app.infrastructure.inbound.docs.responses import SUNARP_RESPONSES
 from app.infrastructure.inbound.dto.request.sunarp_request import AreaQuery, OficinaQuery, PartidaQuery
 from app.infrastructure.inbound.dto.response.sunarp_response import SunarpResponse
 from app.infrastructure.inbound.mapper import sunarp_mapper
@@ -19,13 +20,25 @@ router = APIRouter()
     operation_id="get_sunarp_partida",
     summary="Consultar asientos de una partida en SUNARP",
     description=(
-        "Consulta en tiempo real la SPRL de SUNARP resolviendo los controles "
-        "de seguridad para extraer los títulos (asientos) de una partida registral específica."
+        "Consulta en vivo una partida registral y descarga el asiento de inscripción de cada título.\n\n"
+        "- **SPRL:** inicia sesión, resuelve el CAPTCHA y extrae los títulos (año y número) de la "
+        "Lista de Asientos de la partida.\n"
+        "- **Síguelo Plus:** por cada título busca su seguimiento y descarga el PDF del asiento de "
+        "inscripción (uno por partida vinculada). Cada PDF se publica en `documents[].url`.\n\n"
+        "La navegación la realiza un agente LLM sobre un navegador real (MCP de Playwright), por lo que "
+        "la consulta puede tardar **varios minutos** (unos 7 min en SPRL más 2 a 5 min por título). "
+        "Configure un timeout de cliente acorde.\n\n"
+        "Cada título informa su resultado en `document_status`: `DOWNLOADED`, `NOT_FOUND`, "
+        "`OFFICE_NOT_AVAILABLE` (la oficina no existe en Síguelo Plus; consultar manualmente), "
+        "`YEAR_NOT_AVAILABLE`, `NO_INSCRIPTION_SEAT` o `ERROR`. Una falla en Síguelo Plus no anula los "
+        "asientos obtenidos en SPRL: queda registrada en `audit_entries` con la fuente `SUNARP_SIGUELO`."
     ),
     response_model=SunarpResponse,
     status_code=status.HTTP_200_OK,
+    responses=SUNARP_RESPONSES,
 )
 async def get_sunarp_partida(
+    request: Request,
     oficina: OficinaQuery,
     area: AreaQuery,
     partida: PartidaQuery,
@@ -40,5 +53,5 @@ async def get_sunarp_partida(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal error while fetching SUNARP data",
         ) from exc
-        
-    return sunarp_mapper.to_response(result)
+
+    return sunarp_mapper.to_response(result, base_url=str(request.base_url))

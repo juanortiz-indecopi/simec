@@ -41,6 +41,7 @@ service-account*.json
 *.log
 logs/
 data/
+files/
 *.har
 storage_state.json
 .claude/settings.local.json

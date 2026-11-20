@@ -1,0 +1,117 @@
+- generic [ref=f17e111]:
+  - navigation [ref=f17e112]:
+    - list [ref=f17e114]:
+      - listitem [ref=f17e115]:
+        - link "Datos Título" [ref=f17e116] [cursor=pointer]:
+          - /url: /siguelo/titulo
+      - listitem [ref=f17e117]:
+        - link "Detalle Seguimiento" [ref=f17e118] [cursor=pointer]:
+          - /url: /siguelo/seguimiento
+      - listitem [ref=f17e119]:
+        - link "Salir" [ref=f17e120] [cursor=pointer]:
+          - /url: ""
+          - generic [aria-hidden] [ref=f17e121]: 
+          - text: Salir
+      - listitem
+    - link "Plataforma Virtual Síguelo Plus" [ref=f17e122] [cursor=pointer]:
+      - /url: "#"
+    - textbox [ref=f17e124]: 19:46
+  - heading "¡BIENVENIDO a Síguelo Plus! En esta plataforma puedes hacer el seguimiento de tu trámite, conocer el contenido del título presentado o hacer un pago a cuenta de dicho título." [level=2] [ref=f17e135]
+  - generic [ref=f17e136]: Datos del título consultado
+  - generic [ref=f17e139]:
+    - generic [ref=f17e142]:
+      - generic [ref=f17e143]: Número de Título
+      - textbox [ref=f17e144]: "00017762"
+    - generic [ref=f17e146]:
+      - generic [ref=f17e147]: Año de Título
+      - textbox [ref=f17e148]: "2015"
+    - generic [ref=f17e150]:
+      - generic [ref=f17e151]: Oficina Registral
+      - textbox [ref=f17e152]: CUSCO
+  - generic [ref=f17e153]:
+    - generic [ref=f17e156]:
+      - generic [ref=f17e157]: Tipo de Registro
+      - textbox [ref=f17e158]: PERSONAS JURÍDICAS
+    - generic [ref=f17e160]:
+      - generic [ref=f17e161]: Estado de Título
+      - textbox [ref=f17e162]: INSCRITO
+    - button "Generar Reporte Resumen" [ref=f17e165] [cursor=pointer]
+  - generic [ref=f17e169]:
+    - generic [ref=f17e170]: Partidas Vinculadas
+    - textbox [ref=f17e171]
+  - generic [ref=f17e172]:
+    - generic [ref=f17e175]:
+      - generic [ref=f17e176]: Fecha y Hora de Presentación
+      - textbox [ref=f17e177]: 20/03/2015 13:58:32
+    - generic [ref=f17e179]:
+      - generic [ref=f17e180]: Fecha de Vencimiento
+      - textbox [ref=f17e181]: 18/06/2015
+    - generic [ref=f17e183]:
+      - generic [ref=f17e184]: Lugar de Presentación
+      - textbox [ref=f17e185]: CUSCO
+  - generic [ref=f17e188]:
+    - generic [ref=f17e191]:
+      - generic [ref=f17e192]: Presentante
+      - textbox [ref=f17e193]: NAVARRO ORTEGA, MARLENI
+    - generic [ref=f17e195]:
+      - generic [ref=f17e196]: Documento presentante
+      - textbox [ref=f17e197]: D.N.I-31168906
+    - generic [ref=f17e199]:
+      - generic [ref=f17e200] [cursor=pointer]: Monto por devolver
+      - text: S/ 0.00
+  - generic [ref=f17e206]:
+    - progressbar [ref=f17e207]: INSCRITO
+    - progressbar: PRORROGADO
+    - progressbar: SUSPENDIDO
+  - button "Conoce el color de tu estado - Click aquí" [ref=f17e212] [cursor=pointer]
+  - generic [ref=f17e218]:
+    - paragraph [ref=f17e222] [cursor=pointer]: No es posible agendar una reunión por cuanto el plazo de vigencia del título ha vencido
+    - separator [ref=f17e223]
+  - generic [ref=f17e224]:
+    - generic [ref=f17e227]:
+      - list [ref=f17e228]:
+        - listitem [ref=f17e229]:
+          - button "Actos" [ref=f17e230] [cursor=pointer]
+        - listitem [ref=f17e231]:
+          - button "Participantes" [ref=f17e232] [cursor=pointer]
+        - listitem [ref=f17e233]:
+          - button "Pagos" [ref=f17e234] [cursor=pointer]
+      - table [ref=f17e237]:
+        - rowgroup [ref=f17e238]:
+          - row [ref=f17e239]:
+            - columnheader "CÓDIGO ACTO" [ref=f17e240]
+            - columnheader "DESCRIPCIÓN ACTO" [ref=f17e241]
+        - rowgroup [ref=f17e242]:
+          - row [ref=f17e243]:
+            - cell "00254" [ref=f17e244]
+            - cell "MODIFICACION DE ESTATUTOS DE SOCIEDAD ANONIMA" [ref=f17e245]
+    - table [ref=f17e247]:
+      - row [ref=f17e248]:
+        - cell [ref=f17e249]:
+          - link [ref=f17e250] [cursor=pointer]:
+            - /url: /siguelo/seguimiento
+            - generic [ref=f17e251]:
+              - img [aria-hidden] [ref=f17e252]: list
+              - text: Detalle del Seguimiento (servicio gratuito)
+      - row [ref=f17e253]:
+        - cell [ref=f17e254]:
+          - generic [ref=f17e256] [cursor=pointer]:
+            - img [aria-hidden] [ref=f17e257]: library_books
+            - text: Lectura del título en trámite
+            - img "nuevo" [ref=f17e258]
+      - row [ref=f17e259]:
+        - cell [ref=f17e260]:
+          - generic [ref=f17e262] [cursor=pointer]:
+            - img [aria-hidden] [ref=f17e263]: credit_score
+            - text: Pago a cuenta del título en trámite
+            - img "nuevo" [ref=f17e264]
+      - row [ref=f17e265]:
+        - cell [ref=f17e266]:
+          - generic [ref=f17e268] [cursor=pointer]:
+            - img [aria-hidden] [ref=f17e269]: list_alt
+            - text: Acceder al asiento de inscripción y TIVE
+      - row [ref=f17e270]:
+        - cell [ref=f17e271]:
+          - generic [ref=f17e273] [cursor=pointer]:
+            - img [aria-hidden] [ref=f17e274]: picture_as_pdf
+            - text: Ver anotación

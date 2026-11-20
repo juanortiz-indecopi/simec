@@ -1,3 +1,8 @@
-2026/11/19-21:37:52.308 69a4 Reusing MANIFEST C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/MANIFEST-000001
-2026/11/19-21:37:52.310 69a4 Recovering log #3
-2026/11/19-21:37:52.314 69a4 Reusing old log C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/000003.log 
+2026/11/19-23:22:15.527 45a8 Reusing MANIFEST C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/MANIFEST-000001
+2026/11/19-23:22:15.528 45a8 Recovering log #3
+2026/11/19-23:22:15.529 45a8 Level-0 table #3: started
+2026/11/19-23:22:15.533 45a8 Level-0 table #3: 18482 bytes OK
+2026/11/19-23:22:15.533 45a8 Recovering log #4
+2026/11/19-23:22:15.535 45a8 Reusing old log C:\Users\luisf\Documents\Work\INDECOPI\simec-backend\.cache\sunarp_mcp_profile\Default\Session Storage/000004.log 
+2026/11/19-23:22:15.537 45a8 Delete type=0 #3
+2026/11/19-23:22:15.537 45a8 Delete type=2 #5

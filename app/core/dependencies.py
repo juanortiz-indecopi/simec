@@ -37,9 +37,9 @@ def get_person_use_case() -> GetPersonUseCase:
 
 @lru_cache
 def get_sunarp_use_case() -> GetSunarpUseCase:
-    # El agente LLM+MCP tarda más que un extractor HTTP: timeout propio de 10 minutos
-    # (con Gemini cada paso es más lento que con Claude).
+    # El agente LLM+MCP tarda más que un extractor HTTP (con Gemini cada paso es más lento) y,
+    # además, corre una vez más por cada título en Síguelo Plus para bajar su PDF: 30 minutos.
     return GetSunarpService(
         sunarp=SunarpAgentExtractor(),
-        timeout_s=600.0,
+        timeout_s=1800.0,
     )

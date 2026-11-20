@@ -111,6 +111,60 @@ COMPANY_EXAMPLE: Final[dict[str, Any]] = {
     "audit_entries": [AUDIT_EXAMPLE],
 }
 
+def _sunarp_seat_example(year: str, number: str, size_bytes: int) -> dict[str, Any]:
+    file_name = f"titulo_{year}-{number}_partida_11156404.pdf"
+    return {
+        "year": year,
+        "number": number,
+        "original_text": f"Titulo: {year} - {number}",
+        "documents": [
+            {
+                "partida": "11156404",
+                "url": f"http://localhost:8000/files/sunarp/CUSCO_11156404/{file_name}",
+                "file_path": f"files/sunarp/CUSCO_11156404/{file_name}",
+                "size_bytes": size_bytes,
+            }
+        ],
+        "document_status": "DOWNLOADED",
+        "document_detail": (
+            f"SIGUELO_OK: Se descargó correctamente el asiento de inscripción para el título "
+            f"{number} del año {year} en la oficina registral de CUSCO (partida 11156404)."
+        ),
+    }
+
+
+SUNARP_EXAMPLE: Final[dict[str, Any]] = {
+    "oficina": "CUSCO",
+    "area": "Personas Juridicas",
+    "partida": "11156404",
+    "record": {
+        "partida": "11156404",
+        "seats": [
+            _sunarp_seat_example("2015", "00076288", 346200),
+            _sunarp_seat_example("2015", "00017762", 1847790),
+            _sunarp_seat_example("2014", "00077954", 1634127),
+        ],
+    },
+    "audit_entries": [
+        {
+            "source_name": "SUNARP_SPRL",
+            "query_parameter": "CUSCO | Personas Juridicas | 11156404",
+            "duration_ms": 817321,
+            "status": "SUCCESS",
+            "details": None,
+            "executed_at_utc": "2026-11-20T04:46:43.611683Z",
+        },
+        {
+            "source_name": "SUNARP_SIGUELO",
+            "query_parameter": "CUSCO | 11156404 | 3 títulos",
+            "duration_ms": 677327,
+            "status": "SUCCESS",
+            "details": "3/3 títulos con PDF (3 archivos).",
+            "executed_at_utc": "2026-11-20T04:46:43.242967Z",
+        },
+    ],
+}
+
 PERSON_EXAMPLE: Final[dict[str, Any]] = {
     "dni": "44900952",
     "profile": {
