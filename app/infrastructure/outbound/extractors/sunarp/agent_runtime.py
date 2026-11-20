@@ -54,7 +54,13 @@ async def sesion_playwright_mcp(headless: bool, user_data_dir: str | None):
 
 def crear_modelo() -> BaseChatModel:
     kwargs = {}
-    if os.getenv("LLM_API_KEY"):
+    es_vertex = os.getenv("LLM_PROVIDER") == "google_vertexai"
+    if es_vertex:
+        # Vertex se autentica con la cuenta de servicio (GOOGLE_APPLICATION_CREDENTIALS), sin api_key.
+        if os.getenv("GOOGLE_CLOUD_PROJECT"):
+            kwargs["project"] = os.environ["GOOGLE_CLOUD_PROJECT"]
+        kwargs["location"] = os.getenv("GOOGLE_CLOUD_LOCATION", "us-central1")
+    elif os.getenv("LLM_API_KEY"):
         kwargs["api_key"] = os.environ["LLM_API_KEY"]
     if os.getenv("LLM_BASE_URL"):
         kwargs["base_url"] = os.environ["LLM_BASE_URL"]
@@ -62,6 +68,8 @@ def crear_modelo() -> BaseChatModel:
     if os.getenv("LLM_TEMPERATURE"):
         kwargs["temperature"] = float(os.environ["LLM_TEMPERATURE"])
     proveedor = os.getenv("LLM_PROVIDER", "openai")
+    if proveedor in ("google", "gemini"):  # alias: LangChain solo conoce "google_genai"
+        proveedor = "google_genai"
     if proveedor == "anthropic":
         # Los bloques `thinking` van firmados contra todo el historial: al recortar snapshots
         # antiguos la firma deja de coincidir (400). Navegar no requiere razonamiento extendido.
