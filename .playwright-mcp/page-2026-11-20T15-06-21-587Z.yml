@@ -1,0 +1,143 @@
+- generic [ref=f38e3]:
+  - generic [ref=f38e4]:
+    - img "cerrar asistente" [ref=f38e75]
+    - button [ref=f38e76] [cursor=pointer]:
+      - generic [ref=f38e8]: Activarasistente de voz
+      - img "Imagen" [ref=f38e77]
+    - button "idioma Seleccionar Idioma ▼" [ref=f38e78] [cursor=pointer]:
+      - img "idioma" [ref=f38e79]
+      - generic [ref=f38e13]: Seleccionar Idioma
+      - generic [ref=f38e14]: ▼
+  - generic [ref=f38e16]:
+    - generic [ref=f38e21]:
+      - generic [ref=f38e23]: Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz un pago a cuenta de dicho título.
+      - separator [ref=f38e24]
+      - generic [ref=f38e27]:
+        - generic [ref=f38e28]: Tipo de Seguimiento
+        - generic [ref=f38e30]:
+          - radio "Título" [checked] [ref=f38e80]
+          - text: Título
+        - generic [ref=f38e33]:
+          - radio "Publicidad" [ref=f38e81]
+          - text: Publicidad
+      - generic [ref=f38e35]:
+        - generic [ref=f38e36]: Oficina Registral
+        - generic [ref=f38e37]:
+          - combobox "Oficina Registral" [ref=f38e82]:
+            - option "Seleccione Oficina" [disabled]
+            - option "LIMA"
+            - option "ABANCAY"
+            - option "ANDAHUAYLAS"
+            - option "AREQUIPA"
+            - option "AYACUCHO"
+            - option "BAGUA"
+            - option "BARRANCA"
+            - option "CAJAMARCA"
+            - option "CALLAO"
+            - option "CAMANA"
+            - option "CASMA"
+            - option "CASTILLA _ APLAO"
+            - option "CAÑETE"
+            - option "CHACHAPOYAS"
+            - option "CHEPEN"
+            - option "CHICLAYO"
+            - option "CHIMBOTE"
+            - option "CHINCHA"
+            - option "CHOTA"
+            - option "CUSCO" [selected]
+            - option "ESPINAR"
+            - option "HUACHO"
+            - option "HUAMACHUCO"
+            - option "HUANCAVELICA"
+            - option "HUANCAYO"
+            - option "HUANTA"
+            - option "HUANUCO"
+            - option "HUARAL"
+            - option "HUARAZ"
+            - option "ICA"
+            - option "ILO"
+            - option "ISLAY _ MOLLENDO"
+            - option "JAEN"
+            - option "JUANJUI"
+            - option "JULIACA"
+            - option "LA MERCED (SELVA CENTRAL)"
+            - option "MADRE DE DIOS"
+            - option "MAYNAS"
+            - option "MOQUEGUA"
+            - option "MOYOBAMBA"
+            - option "NAZCA"
+            - option "OTUZCO"
+            - option "PASCO"
+            - option "PISCO"
+            - option "PIURA"
+            - option "PUCALLPA"
+            - option "PUNO"
+            - option "QUILLABAMBA"
+            - option "SAN PEDRO"
+            - option "SATIPO"
+            - option "SICUANI"
+            - option "SULLANA"
+            - option "TACNA"
+            - option "TARAPOTO"
+            - option "TARMA"
+            - option "TINGO MARIA"
+            - option "TRUJILLO"
+            - option "TUMBES"
+            - option "YURIMAGUAS"
+          - text: ▾
+      - generic [ref=f38e41]:
+        - generic [ref=f38e42]: Año de Título
+        - generic [ref=f38e43]:
+          - combobox "Año de Título Número de Título Verificación de seguridad" [ref=f38e83]:
+            - option "Seleccione año" [disabled]
+            - option "2026"
+            - option "2025"
+            - option "2024"
+            - option "2023"
+            - option "2022"
+            - option "2021"
+            - option "2020"
+            - option "2019"
+            - option "2018"
+            - option "2017"
+            - option "2016"
+            - option "2015"
+            - option "2014" [selected]
+            - option "2013"
+            - option "2012"
+            - option "2011"
+            - option "2010"
+            - option "2009"
+            - option "2008"
+            - option "2007"
+            - option "2006"
+            - option "2005"
+            - option "2004"
+            - option "2003"
+            - option "2002"
+            - option "2001"
+            - option "2000"
+            - option "1999"
+            - option "1998"
+            - option "1997"
+            - option "1996"
+            - option "1995"
+            - option "1994"
+            - option "1993"
+            - option "1992"
+            - option "1991"
+            - option "1990"
+            - option "1989"
+            - option "1988"
+            - option "1987"
+            - option "1986"
+            - option "1985"
+          - text: ▾
+      - generic [ref=f38e47]:
+        - generic [ref=f38e48]: Número de Título
+        - spinbutton "Ingrese su número" [ref=f38e84]
+      - generic [ref=f38e50]: Verificación de seguridad
+      - separator [ref=f38e58]
+      - button "BUSCAR" [ref=f38e85] [cursor=pointer]
+      - generic [ref=f38e63]: Al continuar con el uso del servicio usted está aceptando que conoce y está de acuerdo con los Términos y condiciones del servicio Síguelo Plus
+    - generic [ref=f38e66]: v1.0.0

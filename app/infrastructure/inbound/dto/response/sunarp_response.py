@@ -1,7 +1,9 @@
 from pydantic import ConfigDict, Field
 
+from app.domain.models.query import ServedFrom
 from app.domain.models.sunarp import SunarpDocumentStatus
 from app.infrastructure.inbound.docs.examples import SUNARP_EXAMPLE
+from app.infrastructure.inbound.dto.response.served_from import SERVED_FROM_FIELD
 from app.infrastructure.inbound.dto.response.audit_response import AuditResultResponse
 from app.infrastructure.inbound.dto.response.base import ResponseModel
 
@@ -53,6 +55,7 @@ class SunarpResponse(ResponseModel):
     oficina: str = Field(description="Oficina registral consultada", examples=["CUSCO"])
     area: str = Field(description="Área registral consultada", examples=["Personas Juridicas"])
     partida: str = Field(description="Número de partida consultado", examples=["11156404"])
+    served_from: ServedFrom = SERVED_FROM_FIELD
     record: SunarpRecordResponse | None = Field(
         default=None,
         description="Datos de la partida si la extracción fue exitosa"

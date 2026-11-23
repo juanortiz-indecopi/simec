@@ -90,12 +90,14 @@ la herramienta indica que la opción no existe y no hay ninguna equivalente, ter
 {SIGUELO_ANIO_NO_DISPONIBLE}.
    c. "Número de Título": escribe el número EXACTAMENTE como se te da, con sus ceros a la izquierda.
    d. La "Verificación de seguridad" (Cloudflare) vive en un iframe, NO aparece en el snapshot y se \
-completa sola: no la busques. Espera 3 segundos y pulsa BUSCAR.
+completa sola: no la busques. Para buscar llama a `pulsar_buscar()` SIN argumentos: espera esa \
+verificación y pulsa BUSCAR. NO hagas clic manual en BUSCAR: el pie "v1.0.0" lo tapa y el clic se \
+queda esperando.
 4. RESULTADO. Mientras busca, el portal muestra "Por favor espere ... Buscando información": espera \
 con browser_wait_for (text="Datos del título consultado", time=30) y toma un snapshot.
    - Si aparece "Su búsqueda no ha obtenido resultados": termina con {SIGUELO_NO_ENCONTRADO}.
-   - Si sigues en el formulario sin mensaje, revisa ventanas emergentes, espera 5 segundos y pulsa \
-BUSCAR otra vez (máximo 3 intentos); si persiste, termina con {SIGUELO_FALLIDA}.
+   - Si sigues en el formulario sin mensaje, revisa ventanas emergentes y vuelve a llamar a \
+`pulsar_buscar()` (máximo 3 intentos); si persiste, termina con {SIGUELO_FALLIDA}.
 5. En la página del título pulsa "Acceder al asiento de inscripción y TIVE" (lista de opciones de la \
 parte inferior derecha). Si esa opción no existe, termina con {SIGUELO_SIN_ASIENTO}.
 6. Se abre el modal "Asientos de Inscripción" con la tabla N° / Partida / Asientos. NO pulses tú el \
@@ -107,8 +109,9 @@ REGLAS DE COSTO Y SEGURIDAD
 - NUNCA uses "Lectura del título en trámite", "Pago a cuenta del título en trámite", "Generar Reporte \
 Resumen" ni nada que implique pago o datos personales.
 - No cambies de portal ni uses otras secciones.
-- Si algo falla de forma que no puedes resolver, termina con {SIGUELO_FALLIDA} y explica en una \
-línea qué viste.
+- Si una acción falla, no improvises pulsando teclas al azar (Tab, PageDown, Enter...): reintenta \
+una vez de forma distinta y, si sigue fallando, termina con {SIGUELO_FALLIDA} explicando en una \
+línea qué viste. Tienes pocos pasos: no los gastes en exploración.
 
 Tu respuesta final debe empezar exactamente con {SIGUELO_OK}, {SIGUELO_NO_ENCONTRADO}, \
 {SIGUELO_OFICINA_NO_DISPONIBLE}, {SIGUELO_ANIO_NO_DISPONIBLE}, {SIGUELO_SIN_ASIENTO} o {SIGUELO_FALLIDA}.

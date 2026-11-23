@@ -1,0 +1,289 @@
+- generic [ref=e1]:
+  - generic [ref=e11]:
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - link "Privacidad y Seguridad |" [ref=e22] [cursor=pointer]:
+          - /url: /sprl/privacidad-seguridad
+        - link "Ayuda |" [ref=e25] [cursor=pointer]:
+          - /url: /sprl/ayuda
+        - link "Términos y Condiciones |" [ref=e28] [cursor=pointer]:
+          - /url: /sprl/terminos-condiciones
+        - generic [ref=e29]: Contáctenos |
+        - link "Tarifas |" [ref=e33] [cursor=pointer]:
+          - /url: /sprl/tarifas
+        - link "Inicio" [ref=e36] [cursor=pointer]:
+          - /url: /sprl/ingreso
+      - button "Opciones del usuario MYUSER123" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: LF
+        - generic [ref=e40]: Luis
+        - img "down" [ref=e41]
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - generic [aria-hidden] [ref=e46]: LF
+        - generic [ref=e47]:
+          - paragraph [ref=e48]:
+            - text: ¡Hola,
+            - strong [ref=e49]: Luis Fernando Chumbes Ramos
+            - text: "!"
+          - paragraph [ref=e50]:
+            - text: Usuario
+            - strong [ref=e51]: MYUSER123
+            - text: · Individual Externo
+      - generic [ref=e52]:
+        - paragraph [ref=e53]: SALDO DISPONIBLE
+        - paragraph [ref=e54]: S/ 0.00 Soles
+    - generic [ref=e56]:
+      - paragraph [ref=e57]: "BUSCAR SERVICIOS:"
+      - textbox "Escriba el servicio requerido..." [ref=e58]
+    - button [ref=e60] [cursor=pointer]:
+      - img "close" [ref=e61]
+    - generic [ref=e69]:
+      - list [ref=e73]:
+        - listitem [ref=e74]:
+          - generic [ref=e75] [cursor=pointer]:
+            - img "icons:Icono-Tram-Publici-Reg-a" [ref=e76]
+            - generic [ref=e79]: TRÁMITE DE PUBLICIDAD REGISTRAL
+          - list [ref=e81]:
+            - listitem [ref=e82] [cursor=pointer]:
+              - generic [ref=e83]: Solicitar publicidad certificada (vigencias, CRI, etc)
+            - listitem [ref=e84] [cursor=pointer]:
+              - generic [ref=e85]: Solicitar base gráfica registral (BGR)
+            - listitem [ref=e86] [cursor=pointer]:
+              - generic [ref=e87]: Copia Informativa de Titulo Archivado
+            - listitem [ref=e88] [cursor=pointer]:
+              - generic [ref=e89]: Solicitar certificado literal de partida(copia literal)
+            - listitem [ref=e90] [cursor=pointer]:
+              - generic [ref=e91]: Servicios del índice de verificadores (inscripción, actualización y cambio de voluntario de credencial)
+            - listitem [ref=e92] [cursor=pointer]:
+              - generic [ref=e93]: Solicitar Boleta Informativa de Vehículo
+            - listitem [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]: Certificado literal de título archivado / Visualizar
+            - listitem [ref=e96] [cursor=pointer]:
+              - generic [ref=e97]: Búsqueda de índice
+            - listitem [ref=e98] [cursor=pointer]:
+              - generic [ref=e99]: Consulta en el índice nacional de sucesión intestada / de testamento
+            - listitem [ref=e100] [cursor=pointer]:
+              - generic [ref=e101]: Consulta en el índice nacional del registro personal
+            - listitem [ref=e102] [cursor=pointer]:
+              - generic [ref=e103]: Consulta en el índice nacional de personas jurídicas
+            - listitem [ref=e104] [cursor=pointer]:
+              - generic [ref=e105]: Visualización e impresión de partida
+            - listitem [ref=e106] [cursor=pointer]:
+              - generic [ref=e107]: Consulta el índice nacional de registro de mandatos y poderes
+        - listitem [ref=e108]:
+          - generic [ref=e109] [cursor=pointer]:
+            - img "icons:Icono-inscTrami-a" [ref=e110]
+            - generic [ref=e113]: TRÁMITE DE INSCRIPCION DE TÍTULOS
+          - list [ref=e115]:
+            - listitem [ref=e116] [cursor=pointer]:
+              - generic [ref=e117]: Consulta de solicitud de inscripción en línea
+        - listitem [ref=e118]:
+          - generic [ref=e119] [cursor=pointer]:
+            - img "icons:Icono-seguimi-a" [ref=e120]
+            - generic [ref=e123]: SEGUIMIENTO DE TRÁMITES
+          - list [ref=e125]:
+            - listitem [ref=e126] [cursor=pointer]:
+              - generic [ref=e127]: Consulta el estado de la solicitud de publicidad
+            - listitem [ref=e128] [cursor=pointer]:
+              - generic [ref=e129]: Consulta de estado de titulos para pago de liquidación
+        - listitem [ref=e130]:
+          - generic [ref=e131] [cursor=pointer]:
+            - img "icons:Icono-Prepagar-a" [ref=e132]
+            - generic [ref=e135]: PREPAGAR
+          - list [ref=e137]:
+            - listitem [ref=e138] [cursor=pointer]:
+              - generic [ref=e139]: Recarga de saldo
+        - listitem [ref=e140]:
+          - generic [ref=e141] [cursor=pointer]:
+            - img "icons:Icono-Datos-Pers-a" [ref=e142]
+            - generic [ref=e145]: DATOS PERSONALES
+          - list [ref=e147]:
+            - listitem [ref=e148] [cursor=pointer]:
+              - generic [ref=e149]: Editar Datos Personales
+        - listitem [ref=e150]:
+          - generic [ref=e151] [cursor=pointer]:
+            - img "icons:Icono-ManoEngranaje-Adm-Org-a" [ref=e152]
+            - generic [ref=e155]: REPORTES
+          - list [ref=e157]:
+            - listitem [ref=e158] [cursor=pointer]:
+              - generic [ref=e159]: Reporte de trámites realizados
+            - listitem [ref=e160] [cursor=pointer]:
+              - generic [ref=e161]: Reporte de recarga de saldo
+      - generic [ref=e162]:
+        - generic [ref=e163]: SERVICIOS / VISUALIZACIÓN E IMPRESIÓN DE PARTIDA
+        - generic [ref=e171]:
+          - heading "Visualización e impresión de partida" [level=6] [ref=e173]
+          - generic [ref=e179]:
+            - text: ": : : : : :"
+            - generic [ref=e380]:
+              - generic [ref=e382]: Resultado de la Consulta de Partidas por Número
+              - generic [ref=e384]:
+                - table [ref=e386]:
+                  - rowgroup [ref=e387]:
+                    - row [ref=e388]:
+                      - cell "Costo" [ref=e389]
+                      - cell "Usuario" [ref=e390]
+                      - cell "Fecha Actual" [ref=e391]
+                    - row [ref=e392]:
+                      - cell "s/.0.0" [ref=e393]
+                      - cell "MYUSER123" [ref=e394]
+                      - cell "20/11/2026 10:20" [ref=e395]
+                - generic [ref=e396]: "Ahora tenemos un nuevo medio de publicidad registral, de libre acceso para todos: www.sunarp.gob.pe."
+              - generic [ref=e397]: "Total de registros encontrados : 1"
+              - generic [ref=e402]:
+                - generic [ref=e403]:
+                  - generic [ref=e404]:
+                    - table [ref=e406]:
+                      - rowgroup [ref=e417]:
+                        - row [ref=e418]:
+                          - columnheader "Zona Registral caret-up caret-down" [ref=e419] [cursor=pointer]:
+                            - generic [ref=e422]:
+                              - generic [ref=e423]: Zona Registral
+                              - generic [ref=e425]:
+                                - img "caret-up" [ref=e426]
+                                - img "caret-down" [ref=e429]
+                          - columnheader "Oficina Registral caret-up caret-down" [ref=e432] [cursor=pointer]:
+                            - generic [ref=e435]:
+                              - generic [ref=e436]: Oficina Registral
+                              - generic [ref=e438]:
+                                - img "caret-up" [ref=e439]
+                                - img "caret-down" [ref=e442]
+                          - columnheader "Partida caret-up caret-down" [ref=e445] [cursor=pointer]:
+                            - generic [ref=e448]:
+                              - generic [ref=e449]: Partida
+                              - generic [ref=e451]:
+                                - img "caret-up" [ref=e452]
+                                - img "caret-down" [ref=e455]
+                          - columnheader "Número Ficha caret-up caret-down" [ref=e458] [cursor=pointer]:
+                            - generic [ref=e461]:
+                              - generic [ref=e462]: Número Ficha
+                              - generic [ref=e464]:
+                                - img "caret-up" [ref=e465]
+                                - img "caret-down" [ref=e468]
+                          - columnheader "Tomo caret-up caret-down" [ref=e471] [cursor=pointer]:
+                            - generic [ref=e474]:
+                              - generic [ref=e475]: Tomo
+                              - generic [ref=e477]:
+                                - img "caret-up" [ref=e478]
+                                - img "caret-down" [ref=e481]
+                          - columnheader "Folio caret-up caret-down" [ref=e484] [cursor=pointer]:
+                            - generic [ref=e487]:
+                              - generic [ref=e488]: Folio
+                              - generic [ref=e490]:
+                                - img "caret-up" [ref=e491]
+                                - img "caret-down" [ref=e494]
+                          - columnheader "Área Registral caret-up caret-down" [ref=e497] [cursor=pointer]:
+                            - generic [ref=e500]:
+                              - generic [ref=e501]: Área Registral
+                              - generic [ref=e503]:
+                                - img "caret-up" [ref=e504]
+                                - img "caret-down" [ref=e507]
+                          - columnheader "Registro de caret-up caret-down" [ref=e510] [cursor=pointer]:
+                            - generic [ref=e513]:
+                              - generic [ref=e514]: Registro de
+                              - generic [ref=e516]:
+                                - img "caret-up" [ref=e517]
+                                - img "caret-down" [ref=e520]
+                          - columnheader "Visualizar" [ref=e523] [cursor=pointer]
+                    - table [ref=e529]:
+                      - rowgroup [ref=e540]:
+                        - row:
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                          - cell
+                        - row [ref=e541]:
+                          - cell "ZR10" [ref=e542]
+                          - cell "CUSCO" [ref=e543]
+                          - cell "11156404" [ref=e544]
+                          - cell [ref=e545]
+                          - cell [ref=e546]
+                          - cell [ref=e547]
+                          - cell "Personas Juridicas" [ref=e548]
+                          - cell "SOCIEDADES ANONIMAS" [ref=e549]
+                          - cell [ref=e550]:
+                            - button [ref=e554] [cursor=pointer]:
+                              - img "search" [ref=e555]
+                  - generic [ref=e558]: Mostrando 1 registro
+                - list [ref=e560]:
+                  - listitem "Página anterior" [ref=e561]:
+                    - button [disabled] [ref=e562]:
+                      - img "left" [ref=e563]
+                  - listitem "1" [ref=e566] [cursor=pointer]
+                  - listitem "Página siguiente" [ref=e568]:
+                    - button [disabled] [ref=e569]:
+                      - img "right" [ref=e570]
+              - generic [ref=e573]:
+                - text: Estimado Usuario, en caso usted cuente con una solicitud de
+                - strong [ref=e574]: Boleta Informativa generada y pagada
+                - text: ", podrá realizar nuevamente la descarga de la misma, de manera gratuita e ilimitada, contando para ello como"
+                - strong [ref=e575]: máximo con una (01) hora
+                - text: ", la cual comienza desde el momento en que fue generada la solicitud."
+              - generic [ref=e576]:
+                - button "printer Imprimir" [ref=e581] [cursor=pointer]:
+                  - img "printer" [ref=e582]
+                  - generic [ref=e585]: Imprimir
+                - button "arrow-left Regresar" [ref=e590] [cursor=pointer]:
+                  - img "arrow-left" [ref=e591]
+                  - generic [ref=e594]: Regresar
+  - generic:
+    - dialog [ref=e597]:
+      - document:
+        - generic [ref=e598]:
+          - button "Close" [active] [ref=e599] [cursor=pointer]:
+            - img "close" [ref=e601]
+          - generic [ref=e604]: CUSCO
+          - generic [ref=e610]:
+            - generic [ref=e611]:
+              - button "unordered-list Listar Asientos" [ref=e612] [cursor=pointer]:
+                - img "unordered-list" [ref=e613]
+                - generic [ref=e616]: Listar Asientos
+              - button "link Correlación Reg. Predios y Reg. Personal" [ref=e617] [cursor=pointer]:
+                - img "link" [ref=e618]
+                - generic [ref=e621]: Correlación Reg. Predios y Reg. Personal
+            - paragraph [ref=e623]: El costo unitario por visualización de cada imagen de ficha o folio es de 6.60 soles. El costo por visualizacion de asiento electrónico es de 6.60 soles. Para visualizar la página deseada haga click en el link respectivo de la estructura del lado izquierdo de su pantalla.
+    - generic [ref=e627]:
+      - generic [ref=e629]:
+        - button "Close" [ref=e630] [cursor=pointer]:
+          - img "close" [ref=e631]
+        - generic [ref=e634]: Lista de Asientos
+      - table [ref=e643]:
+        - rowgroup [ref=e644]:
+          - 'columnheader "Ordenar por rubro Partida: - 11156404 Nro paginas: 9" [ref=e645]':
+            - row [ref=e646]:
+              - paragraph [ref=e647]: Ordenar por rubro
+            - 'row "Partida: - 11156404" [ref=e648]'
+            - 'row "Nro paginas: 9" [ref=e649]'
+        - rowgroup [ref=e650]:
+          - row [ref=e651]:
+            - 'cell "fund Titulo: 2015 - 00076288 Nro. Asiento: 3 Acto. : AUMENTO DE CAPITAL DE SOCIEDAD ANONIMA Año: 2015 Rubro: Páginas: [ 1 ]" [ref=e652]':
+              - generic [ref=e653]:
+                - img "fund" [ref=e654] [cursor=pointer]
+                - text: "Titulo: 2015 - 00076288"
+              - generic [ref=e657]: "Nro. Asiento: 3"
+              - generic [ref=e658]: "Acto. : AUMENTO DE CAPITAL DE SOCIEDAD ANONIMA"
+              - generic [ref=e659]: "Año: 2015 Rubro:"
+              - generic [ref=e660]: "Páginas: [ 1 ]"
+          - row [ref=e661]:
+            - 'cell "fund Titulo: 2015 - 00017762 Nro. Asiento: 2 Acto. : MODIFICACION DE ESTATUTOS DE SOCIEDAD ANONIMA Año: 2015 Rubro: Páginas: [ 1 ] Páginas: [ 2 ] Páginas: [ 3 ] Páginas: [ 4 ]" [ref=e662]':
+              - generic [ref=e663]:
+                - img "fund" [ref=e664] [cursor=pointer]
+                - text: "Titulo: 2015 - 00017762"
+              - generic [ref=e667]: "Nro. Asiento: 2"
+              - generic [ref=e668]: "Acto. : MODIFICACION DE ESTATUTOS DE SOCIEDAD ANONIMA"
+              - generic [ref=e669]: "Año: 2015 Rubro:"
+              - generic [ref=e670]: "Páginas: [ 1 ] Páginas: [ 2 ] Páginas: [ 3 ] Páginas: [ 4 ]"
+          - row [ref=e671]:
+            - 'cell "fund Titulo: 2014 - 00077954 Nro. Asiento: 1 Acto. : CONSTITUCION DE SOCIEDAD ANONIMA Año: 2014 Rubro: Páginas: [ 1 ] Páginas: [ 2 ] Páginas: [ 3 ] Páginas: [ 4 ]" [ref=e672]':
+              - generic [ref=e673]:
+                - img "fund" [ref=e674] [cursor=pointer]
+                - text: "Titulo: 2014 - 00077954"
+              - generic [ref=e677]: "Nro. Asiento: 1"
+              - generic [ref=e678]: "Acto. : CONSTITUCION DE SOCIEDAD ANONIMA"
+              - generic [ref=e679]: "Año: 2014 Rubro:"
+              - generic [ref=e680]: "Páginas: [ 1 ] Páginas: [ 2 ] Páginas: [ 3 ] Páginas: [ 4 ]"

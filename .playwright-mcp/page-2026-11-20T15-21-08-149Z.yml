@@ -1,0 +1,125 @@
+- generic [ref=f10e1]:
+  - generic [ref=f10e3]:
+    - generic [ref=f10e4]:
+      - button [ref=f10e7] [cursor=pointer]:
+        - generic [ref=f10e8]: Activar asistente de voz
+      - button [ref=f10e11] [cursor=pointer]:
+        - generic [ref=f10e13]: Seleccionar Idioma
+        - generic [ref=f10e14]: ▼
+    - generic [ref=f10e16]:
+      - generic [ref=f10e21]:
+        - generic [ref=f10e23]: Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz un pago a cuenta de dicho título.
+        - separator [ref=f10e24]
+        - generic [ref=f10e27]:
+          - generic [ref=f10e28]: Tipo de Seguimiento
+          - generic [ref=f10e30]:
+            - radio [checked] [ref=f10e31]
+            - text: Título
+          - generic [ref=f10e33]:
+            - radio [ref=f10e34]
+            - text: Publicidad
+        - generic [ref=f10e35]:
+          - generic [ref=f10e36]: Oficina Registral
+          - generic [ref=f10e37]:
+            - combobox [ref=f10e38]
+            - text: ▾
+        - generic [ref=f10e41]:
+          - generic [ref=f10e42]: Año de Título
+          - generic [ref=f10e43]:
+            - combobox [ref=f10e44]
+            - text: ▾
+        - generic [ref=f10e47]:
+          - generic [ref=f10e48]: Número de Título
+          - spinbutton [ref=f10e49]
+        - generic [ref=f10e50]: Verificación de seguridad
+        - separator [ref=f10e54]
+        - button [ref=f10e58] [cursor=pointer]: BUSCAR
+      - generic [ref=f10e59]: v1.0.0
+  - generic:
+    - dialog "Términos y Condiciones de Uso" [active] [ref=f10e63]:
+      - generic [ref=f10e67]:
+        - heading "Términos y Condiciones del Servicio \"Síguelo Plus\"" [level=1] [ref=f10e68]
+        - 'heading "PRIMERA: DESCRIPCIÓN DEL SERVICIO:" [level=3] [ref=f10e69]'
+        - paragraph [ref=f10e70]: "La plataforma “Síguelo” cambia de denominación a “Síguelo Plus”, con la finalidad de optimizar el servicio. Ahora, a través de este servicio fortalecido, los ciudadanos podrán realizar, además del seguimiento del título y de la solicitud de publicidad, lo siguiente:"
+        - list [ref=f10e71]:
+          - listitem [ref=f10e72]:
+            - text: "Lectura de título en trámite:"
+            - list [ref=f10e73]:
+              - listitem [ref=f10e74]: "-Comprende los títulos presentados a través del Sistema de Intermediación Digital (SID SUNARP) y aquellos presentados en soporte papel que se encuentran en el Sistema de Gestión de Títulos Digitalizados (SGTD), con excepción de los títulos en trámite correspondientes al Registro de Testamentos y al Registro Personal."
+              - listitem [ref=f10e75]: "-La visualización de los títulos provenientes del SGTD se encuentra sujeta al proceso de digitalización a cargo de la oficina registral respectiva; en caso el título materia de consulta no se encuentre digitalizado, el sistema comunicará que el acceso debe solicitarse en la oficina registral respectiva."
+              - listitem [ref=f10e76]: "-La visualización del título en trámite se realiza por el tiempo de una hora, no siendo posible la impresión del mismo desde la plataforma “Síguelo Plus”."
+              - listitem [ref=f10e77]: "-El presentante del título accede al servicio sin previo pago de tasa registral conforme al derecho de acceso al expediente, para tal efecto, el sistema incorpora los mecanismos de validación respectivos."
+          - listitem [ref=f10e78]:
+            - text: "Pago a cuenta de título en trámite:"
+            - list [ref=f10e79]:
+              - listitem [ref=f10e80]: "-El abono de los derechos registrales se realiza respecto a títulos que se encuentran en calificación u observados, con excepción de los títulos que cuentan con esquela de liquidación."
+              - listitem [ref=f10e81]: "-El abono de los derechos registrales puede realizarse hasta el último día de la fecha máxima de reingreso del título."
+        - paragraph [ref=f10e82]: Ambos servicios se encuentran disponibles los siete (7) días de la semana, las veinticuatro (24) horas del día.
+        - 'heading "SEGUNDA: DEL ACCESO AL SERVICIO:" [level=3] [ref=f10e83]'
+        - paragraph [ref=f10e84]:
+          - text: 2.1. El servicio “Síguelo Plus” se encuentra disponible en la sede digital de la Sunarp (
+          - link "www.gob.pe/sunarp" [ref=f10e85] [cursor=pointer]:
+            - /url: https://www.gob.pe/sunarp
+          - text: ).
+        - paragraph [ref=f10e86]: 2.2. El ingreso se realiza previa validación del número de título en trámite.
+        - paragraph [ref=f10e87]: "2.3. El acceso se realiza mediante un proceso de validación establecido por la Sunarp, el cual está referido a los siguientes datos:"
+        - list [ref=f10e88]:
+          - listitem [ref=f10e89]: "-Identificación del usuario, con los datos del documento oficial de identidad. En el caso del Documento Nacional de Identidad (DNI) y el Carnet de extranjería se realizará la validación con el servicio web del Registro Nacional de Identificación y Estado Civil (Reniec) y el servicio web de Migraciones, respectivamente."
+          - listitem [ref=f10e90]: "-Número del teléfono celular del usuario."
+          - listitem [ref=f10e91]: "-Correo electrónico del usuario, con la confirmación de su existencia y validez."
+          - listitem [ref=f10e92]: "-El pago para los servicios señalados en la cláusula primera se hará de la siguiente manera:"
+          - list [ref=f10e93]:
+            - listitem [ref=f10e94]: "Lectura de título en trámite: Se realiza de manera anticipada mediante pago en línea por el servicio de Lectura de Título en Trámite a través de la pasarela de pago que presente el sistema."
+            - listitem [ref=f10e95]: "Pago a cuenta del título en trámite: Se realiza previa consignación del monto por concepto de pago a cuenta del título en trámite, a través de la pasarela de pago que presente el sistema."
+        - paragraph [ref=f10e96]: 2.4. La Sunarp puede implementar la validación de la identidad del solicitante, a través de otros documentos oficiales de identidad; así como la validación de otros datos que considere necesarios para garantizar el uso correcto y supervisión del servicio.
+        - 'heading "TERCERA: LIMITACIONES SOBRE USO DEL SERVICIO:" [level=3] [ref=f10e97]'
+        - paragraph [ref=f10e98]: 3.1. El acceso al servicio “Síguelo Plus”, se realiza a través de una computadora conectada a internet y configurada para navegación por web que soporte cookies y frames. El sistema de la Sunarp se encuentra optimizado para trabajar con los navegadores Google Chrome, Safari, Firefox y Opera.
+        - paragraph [ref=f10e99]: 3.2. La Lectura de Título en Trámite comprende los títulos presentados a través del Sistema de Intermediación Digital (SID SUNARP) y aquellos documentos presentados en oficina registral y que se encuentran en el Sistema de Gestión de Títulos Digitalizados (SGTD), salvo aquellos títulos en trámite del Registro de Testamentos, ni aquellos del Registro Personal.
+        - paragraph [ref=f10e100]: En el caso de títulos provenientes del SGTD, su visualización se encuentra supeditada a la etapa del proceso de digitalización en el que se encuentre ejecutando la zona registral respectiva, es decir, si un título aún no cuenta con documentación digitalizada no se podrá otorgar el servicio de Lectura de Título en Trámite. La Sunarp se encuentra en un proceso de mejora continua vinculado a la digitalización progresivo y permanente en cada una de las zonas registrales, a nivel nacional.
+        - paragraph [ref=f10e101]: El servicio sólo comprende la lectura por el lapso de una hora y no la impresión de los documentos que conforman el título.
+        - paragraph [ref=f10e102]: 3.3. En ejercicio del derecho de acceso al expediente, el presentante del título accede al servicio de Lectura de Título en Trámite a través del “Síguelo Plus” sin previo pago de tasa registral por dicho concepto.
+        - paragraph [ref=f10e103]: 3.4. Respecto al servicio de pago a cuenta de título en trámite, se presta sobre títulos que se encuentran en calificación u observados, con excepción de los títulos que cuentan con esquela de liquidación.
+        - 'heading "CUARTA: DISPONIBILIDAD EN EL ACCESO AL SERVICIO:" [level=3] [ref=f10e104]'
+        - paragraph [ref=f10e105]:
+          - text: El usuario podrá acceder las veinticuatro (24) horas, los trescientos sesenta y cinco (365) días del año, salvo en los horarios de mantenimiento programado que será oportunamente comunicado en la sede digital de la Sunarp (
+          - link "www.gob.pe/sunarp" [ref=f10e106] [cursor=pointer]:
+            - /url: https://www.gob.pe/sunarp
+          - text: ) o en sus redes sociales oficiales.
+        - 'heading "QUINTA: OBLIGACIONES DEL USUARIO:" [level=3] [ref=f10e107]'
+        - paragraph [ref=f10e108]: "El usuario se obliga a:"
+        - list [ref=f10e109]:
+          - listitem [ref=f10e110]: 5.1 Emplear correctamente el servicio, por lo que deberá ceñirse a los lineamientos y a los criterios de seguridad diseñados por la Sunarp para el normal funcionamiento del sistema.
+          - listitem [ref=f10e111]: 5.2 Abstenerse de utilizar el servicio “Síguelo Plus” con fines o efectos ilícitos, o contrarios a lo establecido en estos términos y condiciones. Tampoco podrá realizar actos lesivos de los derechos e intereses de terceros, o que, de cualquier forma, puedan dañar, inutilizar, sobrecargar o deteriorar el servicio “Síguelo Plus”, así como sus contenidos o impedir su normal utilización por parte de los demás usuarios.
+          - listitem [ref=f10e112]: 5.3 No proporcionar a terceros su Documento Oficial de Identidad para acceder al “Síguelo Plus” desde la sede digital de la Sunarp.
+          - listitem [ref=f10e113]: 5.4 Ingresar datos ciertos en los campos requeridos, siendo que, de incurrir en algún error, la responsabilidad recaerá en el usuario.
+        - 'heading "SÉPTIMA: EXENCIÓN DE RESPONSABILIDAD DE LA SUNARP:" [level=3] [ref=f10e114]'
+        - paragraph [ref=f10e115]: "De acuerdo a lo previsto en el artículo 104 de la Ley 29571, Ley que aprueba el Código de Protección y Defensa del Consumidor, la Sunarp no asume responsabilidad administrativa por caso fortuito o fuerza mayor, o hecho determinante de un tercero o de la imprudencia del usuario. Se consideran, a modo de ejemplo, los siguientes actos:"
+        - list [ref=f10e116]:
+          - listitem [ref=f10e117]: "-Terremotos, maremotos y otros siniestros o desastres naturales."
+          - listitem [ref=f10e118]: "-Contaminación por virus informáticos."
+          - listitem [ref=f10e119]: "-Fallas en la conexión a “La Sunarp”."
+          - listitem [ref=f10e120]: "-Interrupción del sistema, de la red de teleproceso local y/o de la telecomunicación, internet, correo electrónico o acceso a entidades externas necesarias para el uso del sistema."
+          - listitem [ref=f10e121]: "-Actos de vandalismos, terrorismo y conmoción social, así como sus consecuencias."
+          - listitem [ref=f10e122]: "-Huelgas y paros que pudiesen repercutir en la prestación del servicio."
+          - listitem [ref=f10e123]: "-Actos y consecuencias que no sean previsibles por “La Sunarp”."
+          - listitem [ref=f10e124]: "-Incorrecto uso del servicio, por parte del usuario."
+        - 'heading "OCTAVA: SUPERVISIÓN DE LA SUNARP Y RESPONSABILIDAD DETECTADA:" [level=3] [ref=f10e125]'
+        - paragraph [ref=f10e126]: La Sunarp está facultada para verificar el cumplimiento de las estipulaciones para el acceso al servicio “Síguelo Plus”, así como las limitaciones previstas en los presentes términos y condiciones.
+        - 'heading "NOVENA: MODIFICACIÓN DE LOS TÉRMINOS Y CONDICIONES:" [level=3] [ref=f10e127]'
+        - paragraph [ref=f10e128]: La Sunarp podrá realizar las modificaciones que crea convenientes a los presentes términos y condiciones, en cualquier momento, así como incluir nuevos términos o suprimir algunos de los existentes a la fecha de aceptación de los mismos por el usuario. Los cambios en los términos y condiciones serán efectivos cuando se publiquen. La continuación del uso del sitio web después de haber sido publicado cualquier cambio, será considerada como aceptación de estos cambios.
+        - 'heading "DÉCIMA: DE LOS DERECHOS DE AUTOR:" [level=3] [ref=f10e129]'
+        - paragraph [ref=f10e130]: La titularidad y los derechos de autor del servicio que brinda la Sunarp incluyen las imágenes, fotografías, textos, aplicaciones o subprogramas incorporados en el servicio; encontrándose protegidos por el Decreto Legislativo N° 822, Ley sobre el derecho de autor y sus modificatorias; así como por las disposiciones contenidas en normas internacionales.
+        - 'heading "UNDÉCIMA: PROTECCIÓN DE DATOS PERSONALES:" [level=3] [ref=f10e131]'
+        - paragraph [ref=f10e132]: El usuario declara conocer que los datos personales proporcionados a la Sunarp, quedarán incorporados al banco de datos de la entidad, en el claro y expreso entendimiento que la Sunarp estará facultada a utilizar dicha información para efectos de la gestión de procesamiento de datos, estadísticas y remisión de correspondencia, entre otros, en cumplimiento de lo dispuesto en la Ley N° 29733, Ley de Protección de Datos Personales, y su Reglamento, aprobado por Decreto Supremo N° 003-2013-JUS, y/o de la norma que las sustituya o reglamente.
+        - paragraph [ref=f10e133]: Como titular de sus datos personales, el interesado tiene el derecho de acceder a sus datos en posesión de la Sunarp, conocer las características de su tratamiento, rectificarlos en caso de ser inexactos o incompletos; solicitar sean suprimidos o cancelados.
+      - generic [ref=f10e134]:
+        - button "No Acepto" [ref=f10e135] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f10e136]: 
+          - text: No Acepto
+        - button "Acepto" [ref=f10e137] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f10e138]: 
+          - text: Acepto
+    - dialog [ref=f10e143]:
+      - generic [ref=f10e144]:
+        - button "Cerrar" [ref=f10e145] [cursor=pointer]: ×
+        - img "Publicidad" [ref=f10e146] [cursor=pointer]

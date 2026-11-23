@@ -219,7 +219,43 @@ JS_DESCARGAR_ASIENTOS = r"""async (page) => {
   return { documents, fallos };
 }"""
 
+# Síguelo Plus: según la altura de la ventana, el pie "v1.0.0" (div.version) tapa el botón BUSCAR y
+# el clic con puntero se agota ("intercepts pointer events"). Se espera el token de Cloudflare y se
+# dispara el clic directamente sobre el elemento, que no depende de lo que lo cubra.
+JS_PULSAR_BUSCAR_SIGUELO = """async (page) => {
+  let token = '';
+  for (let i = 0; i < 30; i++) {
+    token = await page.evaluate(() => document.querySelector('input[name="cf-turnstile-response"]')?.value || '');
+    if (token) break;
+    await page.waitForTimeout(1000);
+  }
+  if (!token) throw new Error('la verificacion de seguridad de Cloudflare no se completo');
+  const boton = page.getByRole('button', { name: 'BUSCAR' });
+  await boton.waitFor({ state: 'visible', timeout: 10000 });
+  await boton.evaluate(el => el.click());
+  return 'buscar pulsado';
+}"""
+
 _RESULT_RE = re.compile(r"### Result\s*\n(.*?)(?:\n### |\Z)", re.DOTALL)
+
+
+def crear_herramienta_buscar_siguelo(session: ClientSession) -> BaseTool:
+    """Pulsa BUSCAR del formulario de Síguelo Plus de forma fiable."""
+
+    @tool
+    async def pulsar_buscar() -> str:
+        """Pulsa el botón BUSCAR del formulario de Síguelo Plus.
+
+        Úsala con el formulario ya completo (oficina, año y número). Espera sola a que termine la
+        verificación de seguridad de Cloudflare y pulsa el botón aunque otro elemento lo cubra. No
+        hagas clic manual en BUSCAR. No requiere argumentos.
+        """
+        try:
+            return "OK: " + (await _ejecutar_js(session, JS_PULSAR_BUSCAR_SIGUELO)).replace("\n", " ")[:200]
+        except Exception as exc:
+            return f"ERROR: {exc}"
+
+    return pulsar_buscar
 
 
 def crear_herramienta_descarga_asientos(

@@ -16,6 +16,7 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 - **Python 3.11+**
 - **pip** (gestor de paquetes de Python)
 - **Google Chrome** o **Microsoft Edge** instalado en el sistema (utilizado por Playwright para las fuentes protegidas con anti-bot).
+- **PostgreSQL 15+** (probado con PostgreSQL 18) y, opcionalmente, **pgAdmin 4** para administrarlo. Ver [Base de datos (PostgreSQL)](#base-de-datos-postgresql).
 
 ---
 
@@ -62,6 +63,145 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
    cp .env.example .env
    ```
 
+5. **Crear la base de datos y aplicar las migraciones:** ver la sección siguiente.
+
+---
+
+## Base de datos (PostgreSQL)
+
+El sistema guarda cada consulta en PostgreSQL: la primera consulta de un RUC, DNI o partida se resuelve en vivo contra las fuentes y se guarda; las siguientes se responden desde la base de datos. Con `?refresh=true` se vuelve a consultar la web sin perder lo guardado si una fuente falla.
+
+La persistencia usa un modelo híbrido: tablas relacionales para personas, empresas, vínculos y consultas, y columnas **JSONB** con el resultado íntegro de cada fuente (historial de "fotos" con su fecha de consulta).
+
+| Elemento | Nombre | Uso |
+|---|---|---|
+| Base de datos | `simec_db` | Datos del sistema |
+| Esquema | `simec` | Agrupa todas las tablas del sistema (no se usa `public`) |
+| Usuario dueño | `simec_owner` | Crea y modifica tablas. Lo usa **Alembic** (migraciones) |
+| Usuario de la aplicación | `simec_app` | Solo lee y escribe datos. Lo usa **FastAPI** |
+
+> Si `DATABASE_URL` no está configurada o PostgreSQL no responde, la API sigue funcionando en modo puente (consulta en vivo sin guardar), igual que antes de incorporar la base de datos.
+
+### Paso 1. Crear usuarios y base de datos (una sola vez)
+
+Se ejecuta como superusuario `postgres`. Con **pgAdmin 4**: en el árbol de la izquierda, *Servers → PostgreSQL → Databases*, clic derecho sobre la base **`postgres`** → **Query Tool**, pegar el SQL y presionar **F5**.
+
+**1.1 Usuarios** (reemplazar las contraseñas):
+
+```sql
+CREATE ROLE simec_owner LOGIN PASSWORD 'cambia_esto_owner';
+CREATE ROLE simec_app   LOGIN PASSWORD 'cambia_esto_app';
+```
+
+**1.2 Base de datos** en UTF-8 (ñ y tildes). `CREATE DATABASE` debe ejecutarse **sola** en el editor; junto a otras sentencias, pgAdmin muestra el error *"cannot run inside a transaction block"*:
+
+```sql
+CREATE DATABASE simec_db
+  OWNER simec_owner
+  ENCODING 'UTF8'
+  TEMPLATE template0;
+```
+
+Luego, clic derecho en *Databases* → **Refresh**: debe aparecer `simec_db`.
+
+### Paso 2. Configurar la base `simec_db` (una sola vez)
+
+Este SQL se ejecuta **dentro de `simec_db`**: clic derecho sobre **`simec_db`** → **Query Tool** (la barra superior del editor debe decir `simec_db/postgres@...`), pegar y presionar **F5**:
+
+```sql
+-- Esquema propio
+CREATE SCHEMA simec AUTHORIZATION simec_owner;
+
+-- Extensiones (búsqueda aproximada por nombre y sin tildes)
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+-- Permisos de la app: solo leer y escribir datos (no crear ni borrar tablas)
+GRANT USAGE ON SCHEMA simec TO simec_app;
+ALTER DEFAULT PRIVILEGES FOR ROLE simec_owner IN SCHEMA simec
+  GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO simec_app;
+ALTER DEFAULT PRIVILEGES FOR ROLE simec_owner IN SCHEMA simec
+  GRANT USAGE, SELECT ON SEQUENCES TO simec_app;
+
+-- Esquema por defecto y zona horaria UTC
+ALTER ROLE simec_owner IN DATABASE simec_db SET search_path = simec, public;
+ALTER ROLE simec_app   IN DATABASE simec_db SET search_path = simec, public;
+ALTER DATABASE simec_db SET timezone = 'UTC';
+```
+
+Verificación (en el mismo Query Tool):
+
+```sql
+SELECT version();                                    -- versión de PostgreSQL
+SELECT extname FROM pg_extension;                    -- debe incluir pg_trgm y unaccent
+SELECT schema_name FROM information_schema.schemata
+WHERE schema_name = 'simec';                         -- debe devolver simec
+```
+
+**Errores frecuentes:**
+
+| Mensaje | Causa |
+|---|---|
+| `role "..." already exists` | El usuario ya fue creado antes: se puede ignorar. |
+| `CREATE DATABASE cannot run inside a transaction block` | `CREATE DATABASE` se ejecutó junto con otras sentencias: dejarla sola en el editor. |
+| `permission denied to create extension` | No se está conectado como `postgres` (superusuario). |
+
+> Las tablas **no** se crean a mano en pgAdmin: las crea Alembic en el paso 4.
+
+### Paso 3. Variables de entorno de la base de datos
+
+En el archivo `.env` (ver `.env.example`), con las contraseñas definidas en el paso 1.1:
+
+```env
+# Conexión de la aplicación (usuario simec_app)
+DATABASE_URL=postgresql+asyncpg://simec_app:CONTRASENA_APP@localhost:5432/simec_db
+# Conexión de migraciones (usuario simec_owner), usada por Alembic
+DATABASE_MIGRATION_URL=postgresql+asyncpg://simec_owner:CONTRASENA_OWNER@localhost:5432/simec_db
+DATABASE_SCHEMA=simec
+DATABASE_POOL_SIZE=5
+DATABASE_MAX_OVERFLOW=10
+DATABASE_ECHO=false
+# Horas tras las que un dato guardado se marca como posiblemente desactualizado (is_stale)
+CACHE_DEFAULT_TTL_HOURS=720
+```
+
+> Si una contraseña contiene caracteres especiales (`@`, `:`, `/`, `#`, `%`), deben escribirse codificados en la URL (por ejemplo `@` → `%40`).
+
+### Paso 4. Crear las tablas (migraciones con Alembic)
+
+Desde la raíz del proyecto, con el entorno activado:
+
+```bash
+alembic upgrade head
+```
+
+Esto crea las tablas del esquema `simec` (`sources`, `parties`, `party_links`, `queries`, `source_snapshots`, `snapshot_payloads`, `query_snapshots`, `source_cache`, `news_articles`, `news_mentions`) y carga el catálogo de fuentes. Para verlas en pgAdmin: `simec_db` → clic derecho en *Schemas* → **Refresh** → `simec` → *Tables*.
+
+Comandos útiles de Alembic:
+
+```bash
+alembic current                                   # versión aplicada en la base de datos
+alembic upgrade head                              # aplicar migraciones pendientes
+alembic check                                     # verificar que los modelos y la base coinciden
+alembic revision --autogenerate -m "descripcion"  # nueva migración tras cambiar un modelo
+alembic downgrade -1                              # deshacer la última migración
+```
+
+### Paso 5. Verificar la conexión
+
+Con el servidor levantado (ver [Ejecución del proyecto](#ejecución-del-proyecto)), la consola debe mostrar `Conectado a PostgreSQL (esquema simec).` y el endpoint de salud debe responder:
+
+```bash
+curl http://localhost:8000/api/v1/health
+# {"status":"ok","database":"up"}
+```
+
+| `database` | Significado |
+|---|---|
+| `up` | PostgreSQL responde: las consultas se guardan y se reutilizan. |
+| `down` | PostgreSQL configurado pero no responde: la API consulta en vivo sin guardar. |
+| `disabled` | `DATABASE_URL` no configurada: modo puente, sin persistencia. |
+
 ---
 
 ## Ejecución del proyecto
@@ -71,7 +211,7 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 Desde la raíz del proyecto, ejecuta con `uvicorn`:
 
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 --env-file .env
 ```
 
 Una vez iniciado el servidor, la documentación interactiva estará disponible en:
@@ -85,8 +225,19 @@ Una vez iniciado el servidor, la documentación interactiva estará disponible e
 |---|---|---|
 | Consolidada por **RUC** (11 dígitos) | `GET http://localhost:8000/api/v1/companies/{ruc}` | apis.net.pe, SEACE, SUNAT y RNP |
 | Consolidada por **DNI** (8 dígitos) | `GET http://localhost:8000/api/v1/persons/{dni}` | apis.net.pe, SEACE y SUNAT |
+| **Partida registral** (SUNARP) | `GET http://localhost:8000/api/v1/sunarp/partidas?oficina=CUSCO&area=Personas Juridicas&partida=11156404` | SPRL y Síguelo Plus (puede tardar varios minutos en vivo) |
+| Estado del servicio | `GET http://localhost:8000/api/v1/health` | API y conexión a PostgreSQL |
 
 El RNP solo admite consultas por RUC. Cada respuesta incluye `audit_entries` con la duración, el estado (`SUCCESS`, `NO_DATA` o `ERROR`) y el detalle de cada fuente, de modo que una fuente caída no bloquea a las demás.
+
+**Datos guardados y actualización:** los tres endpoints de consulta aceptan el parámetro `refresh`:
+
+| Llamada | Comportamiento |
+|---|---|
+| `.../companies/20607524476` | Responde desde la base de datos si ya fue consultado; si no, consulta la web y guarda. |
+| `.../companies/20607524476?refresh=true` | Vuelve a consultar todas las fuentes en la web y guarda el resultado. Si una fuente falla, se muestran sus datos guardados. |
+
+La respuesta indica el origen de los datos con `served_from` (`DATABASE`, `LIVE` o `MIXED`) y, por fuente, con `audit_entries[].from_cache`, `data_fetched_at` e `is_stale` (dato que superó su vigencia: conviene ofrecer al usuario actualizarlo).
 
 ### 3. Ejecutar la suite de pruebas (pytest)
 

@@ -14,6 +14,30 @@ from app.infrastructure.outbound.extractors.seace.ruc_adapter import SeaceRucAda
 from app.infrastructure.outbound.extractors.sunat.dni_adapter import SunatDniAdapter
 from app.infrastructure.outbound.extractors.sunat.ruc_adapter import SunatRucAdapter
 from app.infrastructure.outbound.extractors.sunarp.agent_extractor import SunarpAgentExtractor
+from app.application.port.out.snapshot_repository_port import SnapshotRepositoryPort
+from app.core.config import get_settings
+from app.infrastructure.outbound.persistence.adapters.null_snapshot_repository import (
+    NullSnapshotRepository,
+)
+from app.infrastructure.outbound.persistence.adapters.postgres_snapshot_repository import (
+    PostgresSnapshotRepository,
+)
+from app.infrastructure.outbound.persistence.database import Database
+
+
+@lru_cache
+def get_database() -> Database | None:
+    """Motor de PostgreSQL compartido por toda la app; None si DATABASE_URL no está configurada."""
+    return Database.from_settings(get_settings())
+
+
+@lru_cache
+def get_snapshot_repository() -> SnapshotRepositoryPort:
+    """Persistencia de consultas: PostgreSQL si está configurado; si no, una versión vacía."""
+    database = get_database()
+    if database is None:
+        return NullSnapshotRepository()
+    return PostgresSnapshotRepository(database, default_ttl_hours=get_settings().cache_default_ttl_hours)
 
 
 @lru_cache
@@ -23,6 +47,7 @@ def get_company_use_case() -> GetCompanyUseCase:
         seace=SeaceRucAdapter(),
         sunat=SunatRucAdapter(),
         rnp=RnpRucAdapter(),
+        snapshots=get_snapshot_repository(),
     )
 
 
@@ -32,6 +57,7 @@ def get_person_use_case() -> GetPersonUseCase:
         profile=ApisNetPeDniAdapter(),
         seace=SeaceDniAdapter(),
         sunat=SunatDniAdapter(),
+        snapshots=get_snapshot_repository(),
     )
 
 
@@ -42,4 +68,5 @@ def get_sunarp_use_case() -> GetSunarpUseCase:
     return GetSunarpService(
         sunarp=SunarpAgentExtractor(),
         timeout_s=1800.0,
+        snapshots=get_snapshot_repository(),
     )

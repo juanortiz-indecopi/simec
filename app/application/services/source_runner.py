@@ -14,6 +14,7 @@ DEFAULT_TIMEOUT_S = 120.0
 class SourceResult(NamedTuple):
     audit: AuditResult
     data: Any | None
+    raw: Any | None = None  # Respuesta original de la fuente, para guardarla como evidencia.
 
     def data_as(self, kind: type[T]) -> T | None:
         return self.data if isinstance(self.data, kind) else None
@@ -26,7 +27,7 @@ async def _run_source(extractor: ExtractorPort, parameter: str, timeout_s: float
         audit = response.get("audit")
         if not isinstance(audit, AuditResult):
             raise ValueError("Extractor response lacks a valid 'audit'")
-        return SourceResult(audit, response.get("data"))
+        return SourceResult(audit, response.get("data"), response.get("raw"))
     except Exception as exc:
         details = (
             f"Timed out after {timeout_s:g}s"

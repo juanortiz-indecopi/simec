@@ -1,0 +1,138 @@
+- generic [ref=f25e1]:
+  - generic [ref=f25e98]:
+    - navigation [ref=f25e99]:
+      - list [ref=f25e101]:
+        - listitem [ref=f25e102]:
+          - link "Datos Título" [ref=f25e103] [cursor=pointer]:
+            - /url: /siguelo/titulo
+        - listitem [ref=f25e104]:
+          - link "Detalle Seguimiento" [ref=f25e105] [cursor=pointer]:
+            - /url: /siguelo/seguimiento
+        - listitem [ref=f25e106]:
+          - link "Salir" [ref=f25e107] [cursor=pointer]:
+            - /url: ""
+            - generic [aria-hidden] [ref=f25e108]: 
+            - text: Salir
+        - listitem
+      - link "Plataforma Virtual Síguelo Plus" [ref=f25e109] [cursor=pointer]:
+        - /url: "#"
+      - textbox [ref=f25e111]: 19:50
+    - heading "¡BIENVENIDO a Síguelo Plus! En esta plataforma puedes hacer el seguimiento de tu trámite, conocer el contenido del título presentado o hacer un pago a cuenta de dicho título." [level=2] [ref=f25e122]
+    - generic [ref=f25e123]: Datos del título consultado
+    - generic [ref=f25e126]:
+      - generic [ref=f25e129]:
+        - generic [ref=f25e130]: Número de Título
+        - textbox [ref=f25e131]: "00017762"
+      - generic [ref=f25e133]:
+        - generic [ref=f25e134]: Año de Título
+        - textbox [ref=f25e135]: "2015"
+      - generic [ref=f25e137]:
+        - generic [ref=f25e138]: Oficina Registral
+        - textbox [ref=f25e139]: CUSCO
+    - generic [ref=f25e140]:
+      - generic [ref=f25e143]:
+        - generic [ref=f25e144]: Tipo de Registro
+        - textbox [ref=f25e145]: PERSONAS JURÍDICAS
+      - generic [ref=f25e147]:
+        - generic [ref=f25e148]: Estado de Título
+        - textbox [ref=f25e149]: INSCRITO
+      - button "Generar Reporte Resumen" [ref=f25e152] [cursor=pointer]
+    - generic [ref=f25e156]:
+      - generic [ref=f25e157]: Partidas Vinculadas
+      - textbox [ref=f25e158]
+    - generic [ref=f25e159]:
+      - generic [ref=f25e162]:
+        - generic [ref=f25e163]: Fecha y Hora de Presentación
+        - textbox [ref=f25e164]: 20/03/2015 13:58:32
+      - generic [ref=f25e166]:
+        - generic [ref=f25e167]: Fecha de Vencimiento
+        - textbox [ref=f25e168]: 18/06/2015
+      - generic [ref=f25e170]:
+        - generic [ref=f25e171]: Lugar de Presentación
+        - textbox [ref=f25e172]: CUSCO
+    - generic [ref=f25e175]:
+      - generic [ref=f25e178]:
+        - generic [ref=f25e179]: Presentante
+        - textbox [ref=f25e180]: NAVARRO ORTEGA, MARLENI
+      - generic [ref=f25e182]:
+        - generic [ref=f25e183]: Documento presentante
+        - textbox [ref=f25e184]: D.N.I-31168906
+      - generic [ref=f25e186]:
+        - generic [ref=f25e187] [cursor=pointer]: Monto por devolver
+        - text: S/ 0.00
+    - generic [ref=f25e193]:
+      - progressbar [ref=f25e194]: INSCRITO
+      - progressbar: PRORROGADO
+      - progressbar: SUSPENDIDO
+    - button "Conoce el color de tu estado - Click aquí" [ref=f25e199] [cursor=pointer]
+    - generic [ref=f25e205]:
+      - paragraph [ref=f25e209] [cursor=pointer]: No es posible agendar una reunión por cuanto el plazo de vigencia del título ha vencido
+      - separator [ref=f25e210]
+    - generic [ref=f25e211]:
+      - generic [ref=f25e214]:
+        - list [ref=f25e215]:
+          - listitem [ref=f25e216]:
+            - button "Actos" [ref=f25e217] [cursor=pointer]
+          - listitem [ref=f25e218]:
+            - button "Participantes" [ref=f25e219] [cursor=pointer]
+          - listitem [ref=f25e220]:
+            - button "Pagos" [ref=f25e221] [cursor=pointer]
+        - table [ref=f25e224]:
+          - rowgroup [ref=f25e225]:
+            - row [ref=f25e226]:
+              - columnheader "CÓDIGO ACTO" [ref=f25e227]
+              - columnheader "DESCRIPCIÓN ACTO" [ref=f25e228]
+          - rowgroup [ref=f25e229]:
+            - row [ref=f25e230]:
+              - cell "00254" [ref=f25e231]
+              - cell "MODIFICACION DE ESTATUTOS DE SOCIEDAD ANONIMA" [ref=f25e232]
+      - table [ref=f25e234]:
+        - row [ref=f25e235]:
+          - cell [ref=f25e236]:
+            - link [ref=f25e237] [cursor=pointer]:
+              - /url: /siguelo/seguimiento
+              - generic [ref=f25e238]:
+                - img [aria-hidden] [ref=f25e239]: list
+                - text: Detalle del Seguimiento (servicio gratuito)
+        - row [ref=f25e240]:
+          - cell [ref=f25e241]:
+            - generic [ref=f25e243] [cursor=pointer]:
+              - img [aria-hidden] [ref=f25e244]: library_books
+              - text: Lectura del título en trámite
+              - img "nuevo" [ref=f25e245]
+        - row [ref=f25e246]:
+          - cell [ref=f25e247]:
+            - generic [ref=f25e249] [cursor=pointer]:
+              - img [aria-hidden] [ref=f25e250]: credit_score
+              - text: Pago a cuenta del título en trámite
+              - img "nuevo" [ref=f25e251]
+        - row [ref=f25e252]:
+          - cell [ref=f25e253]:
+            - generic [ref=f25e255] [cursor=pointer]:
+              - img [aria-hidden] [ref=f25e256]: list_alt
+              - text: Acceder al asiento de inscripción y TIVE
+        - row [ref=f25e257]:
+          - cell [ref=f25e258]:
+            - generic [ref=f25e260] [cursor=pointer]:
+              - img [aria-hidden] [ref=f25e261]: picture_as_pdf
+              - text: Ver anotación
+  - dialog [ref=f25e265]:
+    - generic [ref=f25e266]:
+      - generic [ref=f25e268]:
+        - generic [ref=f25e269]: "TÍTULO : CUSCO - 2015 - 00017762"
+        - img [aria-hidden] [ref=f25e270]: close
+      - table [ref=f25e274]:
+        - rowgroup [ref=f25e275]:
+          - row [ref=f25e276]:
+            - cell "Asientos de Inscripción" [ref=f25e277]
+          - row [ref=f25e278]:
+            - cell "N°" [ref=f25e279]
+            - cell "Partida" [ref=f25e280]
+            - cell "Asientos" [ref=f25e281]
+        - rowgroup [ref=f25e282]:
+          - row [ref=f25e283]:
+            - cell "1" [ref=f25e284]
+            - cell "11156404" [ref=f25e285]
+            - cell [ref=f25e286]:
+              - button [ref=f25e287] [cursor=pointer]:
+                - img [aria-hidden] [ref=f25e288]: visibility

@@ -9,7 +9,12 @@ auditoría por fuente.
 
 * Consultas independientes: por **RUC** (empresas), por **DNI** (personas) y por **partida
   registral** (SUNARP).
-* Sin base de datos: cada consulta se resuelve en vivo contra las fuentes.
+* Datos guardados en PostgreSQL: la primera consulta se resuelve en vivo contra las fuentes y se
+  guarda; las siguientes se responden desde la base de datos. Con `refresh=true` se actualizan
+  desde la web sin perder lo guardado si una fuente falla. Cada consulta queda registrada con su
+  fecha y las fuentes usadas (trazabilidad).
+* `served_from` (`DATABASE`, `LIVE`, `MIXED`) y `audit_entries[].from_cache` / `data_fetched_at` /
+  `is_stale` indican el origen y la antigüedad de cada dato.
 * Los archivos obtenidos (p.ej. PDFs de asientos de SUNARP) se publican en `/files/...`.
 * Cada fuente queda auditada con duración, estado y detalle. Una fuente caída no bloquea a las demás.
 """
@@ -35,6 +40,10 @@ TAGS_METADATA: Final[list[dict[str, Any]]] = [
             "la partida) y Síguelo Plus (PDF del asiento de inscripción de cada título). Lo resuelve "
             "un agente LLM que controla un navegador vía MCP de Playwright: puede tardar varios minutos."
         ),
+    },
+    {
+        "name": "Health",
+        "description": "Estado de la API y de la conexión a PostgreSQL.",
     },
 ]
 

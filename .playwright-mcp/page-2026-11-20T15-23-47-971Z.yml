@@ -1,0 +1,42 @@
+- generic [ref=f40e1]:
+  - generic [ref=f40e3]:
+    - generic [ref=f40e4]:
+      - button [ref=f40e68] [cursor=pointer]:
+        - generic [ref=f40e8]: Activar asistente de voz
+      - button [ref=f40e70] [cursor=pointer]:
+        - generic [ref=f40e13]: Seleccionar Idioma
+        - generic [ref=f40e14]: ▼
+    - generic [ref=f40e16]:
+      - generic [ref=f40e21]:
+        - generic [ref=f40e23]: Realiza el seguimiento de tu trámite, conoce el contenido de un título presentado o haz un pago a cuenta de dicho título.
+        - separator [ref=f40e24]
+        - generic [ref=f40e27]:
+          - generic [ref=f40e28]: Tipo de Seguimiento
+          - generic [ref=f40e30]:
+            - radio [checked] [ref=f40e72]
+            - text: Título
+          - generic [ref=f40e33]:
+            - radio [ref=f40e73]
+            - text: Publicidad
+        - generic [ref=f40e35]:
+          - generic [ref=f40e36]: Oficina Registral
+          - generic [ref=f40e37]:
+            - combobox [ref=f40e74]
+            - text: ▾
+        - generic [ref=f40e41]:
+          - generic [ref=f40e42]: Año de Título
+          - generic [ref=f40e43]:
+            - combobox [ref=f40e75]
+            - text: ▾
+        - generic [ref=f40e47]:
+          - generic [ref=f40e48]: Número de Título
+          - spinbutton [ref=f40e76]
+        - generic [ref=f40e50]: Verificación de seguridad
+        - separator [ref=f40e58]
+        - button [ref=f40e77] [cursor=pointer]: BUSCAR
+        - generic [ref=f40e63]: Al continuar con el uso del servicio usted está aceptando que conoce y está de acuerdo con los Términos y condiciones del servicio Síguelo Plus
+      - generic [ref=f40e66]: v1.0.0
+  - dialog [active] [ref=f40e81]:
+    - generic [ref=f40e82]:
+      - button "Cerrar" [ref=f40e83] [cursor=pointer]: ×
+      - img "Publicidad" [ref=f40e84] [cursor=pointer]

@@ -1,6 +1,8 @@
 from pydantic import ConfigDict, Field
 
+from app.domain.models.query import ServedFrom
 from app.infrastructure.inbound.docs.examples import COMPANY_EXAMPLE
+from app.infrastructure.inbound.dto.response.served_from import SERVED_FROM_FIELD
 from app.infrastructure.inbound.dto.response.audit_response import AuditResultResponse
 from app.infrastructure.inbound.dto.response.base import ResponseModel
 from app.infrastructure.inbound.dto.response.profile_response import CompanyProfileResponse
@@ -13,6 +15,7 @@ class CompanyResponse(ResponseModel):
     model_config = ConfigDict(from_attributes=True, json_schema_extra={"examples": [COMPANY_EXAMPLE]})
 
     ruc: str = Field(description="RUC consultado", examples=["20607524476"])
+    served_from: ServedFrom = SERVED_FROM_FIELD
     profile: CompanyProfileResponse | None = Field(description="Datos tributarios básicos (apis.net.pe)")
     seace: SeaceProviderRecordResponse | None = Field(
         description="Vigencias RNP, accionistas y adjudicaciones (SEACE)"

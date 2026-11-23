@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.infrastructure.inbound.docs.responses import PERSON_RESPONSES
 from app.infrastructure.inbound.dto.request.person_request import DniPathParam
+from app.infrastructure.inbound.dto.request.refresh_request import RefreshQuery
 from app.infrastructure.inbound.dto.response.person_response import PersonResponse
 from app.infrastructure.inbound.mapper import person_mapper
 from app.application.port.usecase.get_person_use_case import GetPersonUseCase
@@ -22,6 +23,10 @@ router = APIRouter()
     description=(
         "Consulta en paralelo todas las fuentes disponibles para un DNI y devuelve un reporte "
         "consolidado.\n\n"
+        "**Datos guardados:** la primera consulta de un DNI va a la web y se guarda; las siguientes "
+        "se responden desde la base de datos al instante. Con `refresh=true` se vuelve a consultar "
+        "la web y, si una fuente falla, se mantienen sus datos guardados. `served_from` y "
+        "`audit_entries[].from_cache` indican de dónde salió cada dato.\n\n"
         "- **apis.net.pe:** identidad de la persona (nombres y apellidos).\n"
         "- **SEACE:** proveedores donde la persona figura como titular, accionista o representante, "
         "con el detalle de cada uno.\n"
@@ -36,9 +41,10 @@ router = APIRouter()
 async def get_person(
     dni: DniPathParam,
     use_case: Annotated[GetPersonUseCase, Depends(get_person_use_case)],
+    refresh: RefreshQuery = False,
 ) -> PersonResponse:
     try:
-        result = await use_case.execute(person_mapper.to_command(dni))
+        result = await use_case.execute(person_mapper.to_command(dni, refresh))
     except Exception as exc:
         logger.exception("Unexpected error fetching person %s", dni)
         raise HTTPException(

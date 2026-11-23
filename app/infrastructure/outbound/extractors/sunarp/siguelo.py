@@ -37,6 +37,7 @@ from app.infrastructure.outbound.extractors.sunarp.prompts import (
     construir_tarea_siguelo,
 )
 from app.infrastructure.outbound.extractors.sunarp.tools import (
+    crear_herramienta_buscar_siguelo,
     crear_herramienta_descarga_asientos,
     filtrar_herramientas,
 )
@@ -131,7 +132,11 @@ async def descargar_asientos_siguelo(
                 documentos.extend(guardados)
                 return guardados
 
-            herramientas = [*herramientas_mcp, crear_herramienta_descarga_asientos(session, al_descargar)]
+            herramientas = [
+                *herramientas_mcp,
+                crear_herramienta_buscar_siguelo(session),
+                crear_herramienta_descarga_asientos(session, al_descargar),
+            ]
             log(f"[siguelo] título {year}-{number}: inicio del agente")
             try:
                 resultado = await correr_agente(

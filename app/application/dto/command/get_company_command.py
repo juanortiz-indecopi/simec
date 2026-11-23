@@ -8,6 +8,8 @@ RUC_PATTERN: Final = re.compile(r"[0-9]{11}")
 @dataclass(frozen=True, slots=True)
 class GetCompanyCommand:
     ruc: str
+    # True: consultar todas las fuentes en la web aunque haya datos guardados.
+    refresh: bool = False
 
     def __post_init__(self) -> None:
         if not RUC_PATTERN.fullmatch(self.ruc):

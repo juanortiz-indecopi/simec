@@ -1,6 +1,8 @@
 from pydantic import ConfigDict, Field
 
+from app.domain.models.query import ServedFrom
 from app.infrastructure.inbound.docs.examples import PERSON_EXAMPLE
+from app.infrastructure.inbound.dto.response.served_from import SERVED_FROM_FIELD
 from app.infrastructure.inbound.dto.response.audit_response import AuditResultResponse
 from app.infrastructure.inbound.dto.response.base import ResponseModel
 from app.infrastructure.inbound.dto.response.profile_response import PersonProfileResponse
@@ -12,6 +14,7 @@ class PersonResponse(ResponseModel):
     model_config = ConfigDict(from_attributes=True, json_schema_extra={"examples": [PERSON_EXAMPLE]})
 
     dni: str = Field(description="DNI consultado", examples=["44900952"])
+    served_from: ServedFrom = SERVED_FROM_FIELD
     profile: PersonProfileResponse | None = Field(description="Identidad de la persona (apis.net.pe)")
     seace: SeacePersonRecordResponse | None = Field(
         description="Proveedores vinculados a la persona y su detalle (SEACE)"

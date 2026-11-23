@@ -7,6 +7,22 @@ AUDIT_EXAMPLE: Final[dict[str, Any]] = {
     "status": "SUCCESS",
     "details": None,
     "executed_at_utc": "2026-11-10T14:49:46.322370Z",
+    "from_cache": False,
+    "data_fetched_at": "2026-11-10T14:49:46.322370Z",
+    "is_stale": False,
+}
+
+# Fuente servida desde la base de datos (consulta previa): no se consultó en esta petición.
+CACHED_AUDIT_EXAMPLE: Final[dict[str, Any]] = {
+    "source_name": "SUNAT_SCRAPER_RUC",
+    "query_parameter": "20607524476",
+    "duration_ms": 0,
+    "status": "SUCCESS",
+    "details": "Servido desde la base de datos; obtenido de la fuente el 2026-11-10 14:49 UTC.",
+    "executed_at_utc": "2026-11-10T14:49:46.322370Z",
+    "from_cache": True,
+    "data_fetched_at": "2026-11-10T14:49:46.322370Z",
+    "is_stale": False,
 }
 
 SUNAT_EXAMPLE: Final[dict[str, Any]] = {
@@ -72,6 +88,7 @@ SEACE_RECORD_EXAMPLE: Final[dict[str, Any]] = {
 
 COMPANY_EXAMPLE: Final[dict[str, Any]] = {
     "ruc": "20607524476",
+    "served_from": "MIXED",
     "profile": {
         "document_number": "20607524476",
         "legal_name": "INVERSIONES Y SERVICIOS HUAYNA DEL PERU EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA",
@@ -108,7 +125,7 @@ COMPANY_EXAMPLE: Final[dict[str, Any]] = {
             }
         ],
     },
-    "audit_entries": [AUDIT_EXAMPLE],
+    "audit_entries": [AUDIT_EXAMPLE, CACHED_AUDIT_EXAMPLE],
 }
 
 def _sunarp_seat_example(year: str, number: str, size_bytes: int) -> dict[str, Any]:
@@ -137,6 +154,7 @@ SUNARP_EXAMPLE: Final[dict[str, Any]] = {
     "oficina": "CUSCO",
     "area": "Personas Juridicas",
     "partida": "11156404",
+    "served_from": "LIVE",
     "record": {
         "partida": "11156404",
         "seats": [
@@ -153,6 +171,9 @@ SUNARP_EXAMPLE: Final[dict[str, Any]] = {
             "status": "SUCCESS",
             "details": None,
             "executed_at_utc": "2026-11-20T04:46:43.611683Z",
+            "from_cache": False,
+            "data_fetched_at": "2026-11-20T04:46:43.611683Z",
+            "is_stale": False,
         },
         {
             "source_name": "SUNARP_SIGUELO",
@@ -161,12 +182,16 @@ SUNARP_EXAMPLE: Final[dict[str, Any]] = {
             "status": "SUCCESS",
             "details": "3/3 títulos con PDF (3 archivos).",
             "executed_at_utc": "2026-11-20T04:46:43.242967Z",
+            "from_cache": False,
+            "data_fetched_at": "2026-11-20T04:46:43.242967Z",
+            "is_stale": False,
         },
     ],
 }
 
 PERSON_EXAMPLE: Final[dict[str, Any]] = {
     "dni": "44900952",
+    "served_from": "LIVE",
     "profile": {
         "document_number": "44900952",
         "full_name": "RONALD RUIZ AUCCAPIÑA",
@@ -189,5 +214,7 @@ PERSON_EXAMPLE: Final[dict[str, Any]] = {
         ],
     },
     "sunat": {**SUNAT_EXAMPLE, "tax_id": "10449009521", "taxpayer_type": "PERSONA NATURAL SIN NEGOCIO"},
-    "audit_entries": [{**AUDIT_EXAMPLE, "source_name": "SEACE_PENTAHO_CDA_DNI", "query_parameter": "44900952"}],
+    "audit_entries": [
+        {**AUDIT_EXAMPLE, "source_name": "SEACE_PENTAHO_CDA_DNI", "query_parameter": "44900952"}
+    ],
 }
