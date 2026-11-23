@@ -51,7 +51,75 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 
 4. **Configurar las variables de entorno:**
 
-   Copia el archivo de ejemplo `.env.example` a `.env` y ajusta los valores si es necesario.
+   Copia el archivo de ejemplo `.env.example` a `.env` y reemplaza los valores marcados como `CAMBIAR`. El `.env` contiene credenciales: **nunca se sube a git** (está en `.gitignore`); `.env.example` sí se versiona y solo lleva valores de ejemplo.
+
+   <details>
+   <summary><strong>Plantilla de <code>.env.example</code></strong> (todas las variables que lee el sistema)</summary>
+
+   ```env
+   # =====================================================================
+   # SIMEC Backend - Variables de entorno
+   # Copiar como .env y reemplazar los valores CAMBIAR. Nunca subir el .env a git.
+   # =====================================================================
+
+   # --- Base de datos (PostgreSQL) ---------------------------------------
+   # Conexión de la aplicación: usuario simec_app (solo lee y escribe datos).
+   # Si se deja vacía o se comenta, la API funciona sin persistencia (modo puente).
+   DATABASE_URL=postgresql+asyncpg://simec_app:CAMBIAR@localhost:5432/simec_db
+   # Conexión de migraciones (Alembic): usuario simec_owner (crea y modifica tablas).
+   DATABASE_MIGRATION_URL=postgresql+asyncpg://simec_owner:CAMBIAR@localhost:5432/simec_db
+   DATABASE_SCHEMA=simec
+   DATABASE_POOL_SIZE=5
+   DATABASE_MAX_OVERFLOW=10
+   # true muestra en consola cada sentencia SQL (solo para depurar).
+   DATABASE_ECHO=false
+
+   # Horas tras las que un dato guardado se marca como posiblemente desactualizado
+   # (is_stale). Solo avisa: nunca re-consulta automáticamente. 720 = 30 días.
+   # Cada fuente tiene además su propia vigencia en la tabla simec.sources.
+   CACHE_DEFAULT_TTL_HOURS=720
+
+   # --- Archivos generados (PDFs de SUNARP) ------------------------------
+   FILES_DIR=files
+   # URL pública del backend para armar enlaces a los PDFs detrás de un proxy
+   # (p.ej. https://simec.indecopi.gob.pe). Vacía = se usa la URL de la petición.
+   PUBLIC_BASE_URL=
+
+   # --- SUNARP (SPRL y Síguelo Plus) -------------------------------------
+   SUNARP_USER=CAMBIAR
+   SUNARP_PASS=CAMBIAR
+   # true = navegador oculto; false = se ve la ventana (útil para depurar).
+   SUNARP_HEADLESS=false
+   # false = no descarga los PDFs de Síguelo Plus (solo lista los asientos).
+   SUNARP_SIGUELO_ENABLED=true
+   # Opcionales (valores por defecto entre paréntesis):
+   # SUNARP_AGENT_PROFILE_DIR=.cache/sunarp_mcp_profile   (perfil de Chrome del agente)
+   # SUNARP_PROFILE_DIR=.cache/sunarp_profile             (perfil del extractor clásico)
+   # SUNARP_FILES_DIR=files/sunarp                        (carpeta de los PDFs)
+
+   # --- Modelo de lenguaje del agente SUNARP -----------------------------
+   # Proveedor: openai | anthropic | google_genai | google_vertexai
+   LLM_PROVIDER=google_vertexai
+   LLM_MODEL=CAMBIAR
+   # Solo para openai / anthropic / google_genai (no se usa con Vertex AI):
+   LLM_API_KEY=
+   # Opcional: endpoint compatible con OpenAI (proxy o servidor propio).
+   LLM_BASE_URL=
+   # Opcional: vacío = valor por defecto del modelo (algunos modelos no lo aceptan).
+   LLM_TEMPERATURE=
+
+   # Solo para LLM_PROVIDER=google_vertexai:
+   GOOGLE_CLOUD_PROJECT=CAMBIAR
+   GOOGLE_CLOUD_LOCATION=global
+   # Ruta al JSON de la cuenta de servicio (si no se usa `gcloud auth application-default login`).
+   # GOOGLE_APPLICATION_CREDENTIALS=C:\ruta\a\cuenta-servicio.json
+
+   # --- Otros ------------------------------------------------------------
+   # No usado actualmente por el código (reservado para despliegue en contenedores).
+   DOCKER_ENV=false
+   ```
+
+   </details>
 
    En Windows (PowerShell):
    ```powershell
@@ -150,7 +218,7 @@ WHERE schema_name = 'simec';                         -- debe devolver simec
 
 ### Paso 3. Variables de entorno de la base de datos
 
-En el archivo `.env` (ver `.env.example`), con las contraseñas definidas en el paso 1.1:
+En el archivo `.env` (ver la [plantilla completa](#instalación-y-configuración) del paso 4 de instalación), con las contraseñas definidas en el paso 1.1:
 
 ```env
 # Conexión de la aplicación (usuario simec_app)
