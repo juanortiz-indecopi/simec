@@ -53,6 +53,19 @@ INSTAGRAM_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     },
 }
 
+NEWS_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
+    status.HTTP_200_OK: {
+        "description": "Consulta procesada. Revise `audit_entries` para ver el estado de la fuente."
+    },
+    status.HTTP_422_UNPROCESSABLE_CONTENT: {
+        "description": "Faltan `name` y `topic`, o alguno tiene un formato inválido."
+    },
+    status.HTTP_500_INTERNAL_SERVER_ERROR: {
+        "model": ErrorResponse,
+        "description": "Error inesperado al buscar noticias.",
+    },
+}
+
 PERSON_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     status.HTTP_200_OK: {
         "description": "Reporte generado. Revise `audit_entries` para ver el estado de cada fuente."

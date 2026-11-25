@@ -218,6 +218,10 @@ class PostgresSnapshotRepository(SnapshotRepositoryPort):
             )
             if became_current:
                 current_sources.add(execution.source_name)
+            if outcome.articles and execution.is_success:
+                await repo.insert_articles(
+                    outcome.articles, source_id=source.id, snapshot_id=snapshot_id
+                )
 
         await repo.link_query_snapshots(
             query_id,

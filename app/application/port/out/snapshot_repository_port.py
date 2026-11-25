@@ -23,6 +23,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from app.domain.models.audit import AuditResult
+from app.domain.models.news import NewsArticle
 from app.domain.models.party import PartyLink, PartyRef
 from app.domain.models.query import FetchMode, QueryType, ServedFrom, StoredSnapshot
 
@@ -62,6 +63,8 @@ class QueryOutcome:
     # Vínculos encontrados en las ejecuciones exitosas. Los vínculos previos de esa misma fuente
     # y sujeto que ya no aparezcan se marcan como inactivos.
     links: tuple[PartyLink, ...] = ()
+    # Noticias obtenidas en vivo en esta consulta. Se guardan una sola vez y sin vincular a nadie.
+    articles: tuple[NewsArticle, ...] = ()
 
 
 class SnapshotRepositoryPort(ABC):

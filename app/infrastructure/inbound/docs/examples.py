@@ -258,6 +258,29 @@ INSTAGRAM_EXAMPLE: Final[dict[str, Any]] = {
     ],
 }
 
+NEWS_EXAMPLE: Final[dict[str, Any]] = {
+    "query": '"empresa demo" indecopi',
+    "name": "empresa demo",
+    "topic": "indecopi",
+    "served_from": "LIVE",
+    "total": 1,
+    "reached_limit": False,
+    "articles": [
+        {
+            "title": "Indecopi evalúa el mercado de Empresa Demo",
+            "url": "https://news.google.com/rss/articles/CBMiEjemplo",
+            "article_id": "CBMiEjemplo",
+            "outlet": "Medio Demo",
+            "outlet_url": "https://medio.example",
+            "published_at": "2026-11-24T15:00:00Z",
+            "name_in_title": True,
+        }
+    ],
+    "audit_entries": [
+        {**AUDIT_EXAMPLE, "source_name": "GOOGLE_NEWS_RSS", "query_parameter": '"empresa demo" indecopi'}
+    ],
+}
+
 PERSON_EXAMPLE: Final[dict[str, Any]] = {
     "dni": "44900952",
     "served_from": "LIVE",

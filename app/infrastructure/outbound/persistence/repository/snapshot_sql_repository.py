@@ -3,6 +3,7 @@
 Cada método ejecuta sentencias sobre la sesión recibida; NO confirma ni abre transacciones: eso lo
 decide el adaptador, que agrupa todo un guardado en una única transacción corta.
 """
+import hashlib
 from collections.abc import Collection, Iterable
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -13,8 +14,10 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.domain.models.audit import AuditStatus
+from app.domain.models.news import NewsArticle
 from app.domain.models.party import PartyLink, PartyRef
 from app.infrastructure.outbound.persistence.entity import (
+    NewsArticleEntity,
     PartyEntity,
     PartyLinkEntity,
     QueryEntity,
@@ -326,6 +329,36 @@ class SnapshotSqlRepository:
             ).returning(SourceCacheEntity.last_success_snapshot_id)
         )
         return success_at is not None and current.scalar_one() == snapshot_id
+
+    # ------------------------------------------------------------------ noticias
+    async def insert_articles(
+        self, articles: Iterable[NewsArticle], *, source_id: int, snapshot_id: int
+    ) -> None:
+        """Guarda las noticias nuevas; las que ya existían conservan su primera foto."""
+        rows = [
+            {
+                "source_id": source_id,
+                "snapshot_id": snapshot_id,
+                "url": article.url,
+                "url_hash": hashlib.sha256(article.url.encode("utf-8")).hexdigest(),
+                "title": article.title,
+                "published_at": article.published_at,
+                "metadata_": {
+                    "outlet": article.outlet,
+                    "outlet_url": article.outlet_url,
+                    "article_id": article.article_id,
+                },
+            }
+            for article in articles
+        ]
+        if rows:
+            # Orden fijo: dos guardados simultáneos no se bloquean entre sí.
+            rows.sort(key=lambda row: row["url_hash"])
+            await self._session.execute(
+                pg_insert(NewsArticleEntity)
+                .values(rows)
+                .on_conflict_do_nothing(index_elements=["url_hash"])
+            )
 
     # ------------------------------------------------------------------ vínculos
     async def upsert_link(

@@ -4,12 +4,13 @@ DESCRIPTION: Final = """
 Backend para el monitoreo de mercados y conductas anticompetitivas.
 
 Agrega fuentes públicas peruanas (**SEACE**, **SUNAT**, **RNP**, **SUNARP** y **apis.net.pe**) y
-redes sociales (**Instagram** y páginas de **Facebook**),
+redes sociales (**Instagram** y páginas de **Facebook**) y noticias (**Google News**),
 normaliza la información de personas naturales y jurídicas, y devuelve un reporte consolidado con
 auditoría por fuente.
 
 * Consultas independientes: por **RUC** (empresas), por **DNI** (personas), por **partida
-  registral** (SUNARP), por **username** (Instagram) y por **página** (Facebook).
+  registral** (SUNARP), por **username** (Instagram), por **página** (Facebook) y por
+  **nombre o tema** (noticias).
 * Datos guardados en PostgreSQL: la primera consulta se resuelve en vivo contra las fuentes y se
   guarda; las siguientes se responden desde la base de datos. Con `refresh=true` se actualizan
   desde la web sin perder lo guardado si una fuente falla. Cada consulta queda registrada con su
@@ -49,6 +50,10 @@ TAGS_METADATA: Final[list[dict[str, Any]]] = [
     {
         "name": "Instagram",
         "description": "Consulta de un perfil por **username**, sin login.",
+    },
+    {
+        "name": "News",
+        "description": "Búsqueda de noticias por **nombre** o **tema** en Google News.",
     },
     {
         "name": "Health",

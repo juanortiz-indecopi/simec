@@ -11,6 +11,7 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 - **SUNARP (SPRL y Síguelo Plus):** Asientos de una partida registral y sus PDF.
 - **Instagram:** Perfil por username (sin login).
 - **Facebook:** Página de empresa, con comparación opcional contra un RUC (sin login).
+- **Google News (RSS):** Noticias por nombre o tema (título, medio, fecha y enlace).
 
 ---
 
@@ -306,6 +307,7 @@ Una vez iniciado el servidor, la documentación interactiva estará disponible e
 | **Partida registral** (SUNARP) | `GET http://localhost:8000/api/v1/sunarp/partidas?oficina=CUSCO&area=Personas Juridicas&partida=11156404` | SPRL y Síguelo Plus (puede tardar varios minutos en vivo) |
 | **Perfil de Instagram** | `GET http://localhost:8000/api/v1/instagram/{username}` | Instagram |
 | **Página de Facebook** | `GET http://localhost:8000/api/v1/facebook/pages?page=codideep&ruc=20603687478` (`ruc` opcional) | Facebook y, con `ruc`, apis.net.pe y SUNAT |
+| **Noticias** | `GET http://localhost:8000/api/v1/news?name=Backus&topic=Indecopi` (al menos uno) | Google News (RSS) |
 | Estado del servicio | `GET http://localhost:8000/api/v1/health` | API y conexión a PostgreSQL |
 
 El RNP solo admite consultas por RUC. Cada respuesta incluye `audit_entries` con la duración, el estado (`SUCCESS`, `NO_DATA` o `ERROR`) y el detalle de cada fuente, de modo que una fuente caída no bloquea a las demás.

@@ -14,6 +14,7 @@ class QueryType(str, Enum):
     SUNARP_PARTIDA = "SUNARP_PARTIDA"
     INSTAGRAM_PROFILE = "INSTAGRAM_PROFILE"
     FACEBOOK_PAGE = "FACEBOOK_PAGE"
+    NEWS_SEARCH = "NEWS_SEARCH"
 
 
 class FetchMode(str, Enum):

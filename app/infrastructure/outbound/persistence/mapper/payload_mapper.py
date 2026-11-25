@@ -19,6 +19,7 @@ from typing import Any, Final, Union, get_args, get_origin, get_type_hints
 
 from app.domain.models.facebook import FacebookPage
 from app.domain.models.instagram import InstagramProfile
+from app.domain.models.news import NewsSearch
 from app.domain.models.profile import CompanyProfile, PersonProfile
 from app.domain.models.rnp import RnpRecord
 from app.domain.models.seace import SeacePersonRecord, SeaceProviderRecord
@@ -39,6 +40,7 @@ PAYLOAD_TYPES: Final[dict[str, type]] = {
         SunarpRecord,
         InstagramProfile,
         FacebookPage,
+        NewsSearch,
     )
 }
 
