@@ -189,6 +189,75 @@ SUNARP_EXAMPLE: Final[dict[str, Any]] = {
     ],
 }
 
+FACEBOOK_EXAMPLE: Final[dict[str, Any]] = {
+    "requested_page": "codideep",
+    "served_from": "LIVE",
+    "page": {
+        "key": "codideep",
+        "page_url": "https://www.facebook.com/codideep",
+        "account_id": "100063518592455",
+        "page_id": "1727888410822955",
+        "name": "CODIDEEP EIRL",
+        "category": "Empresa de software",
+        "description": "Nos especializamos en soluciones de software empresarial",
+        "city": "Abancay",
+        "address": "Abancay - Apurímac - Perú, Abancay, Peru",
+        "is_verified": False,
+        "followers": 1164,
+        "phones": [],
+        "emails": ["contact@codideep.com"],
+        "links": [{"url": "https://eirl.codideep.com/", "platform": "WEB"}],
+        "created_on": "2016-04-27",
+        "has_active_ads": False,
+    },
+    "verification": {
+        "ruc": "20603687478",
+        "result": "PROBABLE",
+        "reasons": ["Coincide la forma societaria (EIRL)", "Coincide el nombre distintivo"],
+        "warnings": [],
+    },
+    "audit_entries": [
+        {**AUDIT_EXAMPLE, "source_name": "FACEBOOK_PAGE", "query_parameter": "codideep"}
+    ],
+}
+
+INSTAGRAM_EXAMPLE: Final[dict[str, Any]] = {
+    "username": "nasa",
+    "served_from": "LIVE",
+    "profile": {
+        "username": "nasa",
+        "full_name": "NASA",
+        "biography": "Making the seemingly impossible, possible. ✨",
+        "is_private": False,
+        "profile_url": "https://www.instagram.com/nasa/",
+        "photo_url": "http://localhost:8000/files/instagram/nasa_0123456789ab.jpg",
+        "photo_path": "files/instagram/nasa_0123456789ab.jpg",
+        "account_id": "528817151",
+        "is_verified": True,
+        "followers": 104241480,
+        "following": 91,
+        "posts_count": 5024,
+        "links": [{"url": "https://www.nasa.gov", "platform": "WEB", "title": "NASA.gov Homepage"}],
+        "mentions": [],
+        "threads_username": "nasa",
+        "latest_post": {
+            "url": "https://www.instagram.com/p/DgIPu3wl3OR/",
+            "media_type": "PHOTO",
+            "published_on": "2026-11-24",
+            "caption": "Texto de la publicación",
+        },
+        "latest_photo": {
+            "url": "https://www.instagram.com/p/DgIPu3wl3OR/",
+            "media_type": "PHOTO",
+            "published_on": "2026-11-24",
+            "caption": "Texto de la publicación",
+        },
+    },
+    "audit_entries": [
+        {**AUDIT_EXAMPLE, "source_name": "INSTAGRAM_PROFILE", "query_parameter": "nasa"}
+    ],
+}
+
 PERSON_EXAMPLE: Final[dict[str, Any]] = {
     "dni": "44900952",
     "served_from": "LIVE",

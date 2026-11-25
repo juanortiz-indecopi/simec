@@ -1,11 +1,17 @@
 from functools import lru_cache
 
 from app.application.port.usecase.get_company_use_case import GetCompanyUseCase
+from app.application.port.usecase.get_facebook_page_use_case import GetFacebookPageUseCase
+from app.application.port.usecase.get_instagram_use_case import GetInstagramUseCase
 from app.application.port.usecase.get_person_use_case import GetPersonUseCase
 from app.application.port.usecase.get_sunarp_use_case import GetSunarpUseCase
 from app.application.services.get_company_service import GetCompanyService
+from app.application.services.get_facebook_page_service import GetFacebookPageService
+from app.application.services.get_instagram_service import GetInstagramService
 from app.application.services.get_person_service import GetPersonService
 from app.application.services.get_sunarp_service import GetSunarpService 
+from app.infrastructure.outbound.extractors.facebook.page_adapter import FacebookPageAdapter
+from app.infrastructure.outbound.extractors.instagram.username_adapter import InstagramUsernameAdapter
 from app.infrastructure.outbound.extractors.profile.dni_adapter import ApisNetPeDniAdapter
 from app.infrastructure.outbound.extractors.profile.ruc_adapter import ApisNetPeRucAdapter
 from app.infrastructure.outbound.extractors.rnp.ruc_adapter import RnpRucAdapter
@@ -57,6 +63,24 @@ def get_person_use_case() -> GetPersonUseCase:
         profile=ApisNetPeDniAdapter(),
         seace=SeaceDniAdapter(),
         sunat=SunatDniAdapter(),
+        snapshots=get_snapshot_repository(),
+    )
+
+
+@lru_cache
+def get_instagram_use_case() -> GetInstagramUseCase:
+    return GetInstagramService(
+        profile=InstagramUsernameAdapter(),
+        snapshots=get_snapshot_repository(),
+    )
+
+
+@lru_cache
+def get_facebook_page_use_case() -> GetFacebookPageUseCase:
+    return GetFacebookPageService(
+        page=FacebookPageAdapter(),
+        profile=ApisNetPeRucAdapter(),
+        sunat=SunatRucAdapter(),
         snapshots=get_snapshot_repository(),
     )
 

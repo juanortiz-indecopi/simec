@@ -3,12 +3,13 @@ from typing import Any, Final
 DESCRIPTION: Final = """
 Backend para el monitoreo de mercados y conductas anticompetitivas.
 
-Agrega fuentes públicas peruanas (**SEACE**, **SUNAT**, **RNP**, **SUNARP** y **apis.net.pe**),
+Agrega fuentes públicas peruanas (**SEACE**, **SUNAT**, **RNP**, **SUNARP** y **apis.net.pe**) y
+redes sociales (**Instagram** y páginas de **Facebook**),
 normaliza la información de personas naturales y jurídicas, y devuelve un reporte consolidado con
 auditoría por fuente.
 
-* Consultas independientes: por **RUC** (empresas), por **DNI** (personas) y por **partida
-  registral** (SUNARP).
+* Consultas independientes: por **RUC** (empresas), por **DNI** (personas), por **partida
+  registral** (SUNARP), por **username** (Instagram) y por **página** (Facebook).
 * Datos guardados en PostgreSQL: la primera consulta se resuelve en vivo contra las fuentes y se
   guarda; las siguientes se responden desde la base de datos. Con `refresh=true` se actualizan
   desde la web sin perder lo guardado si una fuente falla. Cada consulta queda registrada con su
@@ -40,6 +41,14 @@ TAGS_METADATA: Final[list[dict[str, Any]]] = [
             "la partida) y Síguelo Plus (PDF del asiento de inscripción de cada título). Lo resuelve "
             "un agente LLM que controla un navegador vía MCP de Playwright: puede tardar varios minutos."
         ),
+    },
+    {
+        "name": "Facebook",
+        "description": "Consulta de **páginas de empresa**, con comparación opcional contra un RUC.",
+    },
+    {
+        "name": "Instagram",
+        "description": "Consulta de un perfil por **username**, sin login.",
     },
     {
         "name": "Health",

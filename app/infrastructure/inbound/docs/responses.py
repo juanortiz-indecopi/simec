@@ -31,6 +31,28 @@ SUNARP_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     },
 }
 
+FACEBOOK_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
+    status.HTTP_200_OK: {
+        "description": "Consulta procesada. Revise `audit_entries` para ver el estado de cada fuente."
+    },
+    status.HTTP_422_UNPROCESSABLE_CONTENT: {"description": "`page` o `ruc` tienen un formato inválido."},
+    status.HTTP_500_INTERNAL_SERVER_ERROR: {
+        "model": ErrorResponse,
+        "description": "Error inesperado al consultar Facebook.",
+    },
+}
+
+INSTAGRAM_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
+    status.HTTP_200_OK: {
+        "description": "Consulta procesada. Revise `audit_entries` para ver el estado de la fuente."
+    },
+    status.HTTP_422_UNPROCESSABLE_CONTENT: {"description": "`username` tiene un formato inválido."},
+    status.HTTP_500_INTERNAL_SERVER_ERROR: {
+        "model": ErrorResponse,
+        "description": "Error inesperado al consultar Instagram.",
+    },
+}
+
 PERSON_RESPONSES: Final[dict[int | str, dict[str, Any]]] = {
     status.HTTP_200_OK: {
         "description": "Reporte generado. Revise `audit_entries` para ver el estado de cada fuente."
