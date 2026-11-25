@@ -7,6 +7,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - SUNARP_USER=MYUSER123 
-      - SUNARP_PASS=BU&VQESCG9
+      - SUNARP_USER=${SUNARP_USER:-}
+      - SUNARP_PASS=${SUNARP_PASS:-}
     restart: unless-stopped

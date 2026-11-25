@@ -35,7 +35,7 @@ def cached_audit(snapshot: StoredSnapshot, query_parameter: str) -> AuditResult:
         query_parameter=query_parameter,
         duration_ms=0,
         status=AuditStatus.SUCCESS,
-        details=f"Servido desde la base de datos; obtenido de la fuente el {_fmt(snapshot.executed_at)}.",
+        details=f"Fuente desde la base de datos; obtenido de la fuente el {_fmt(snapshot.executed_at)}.",
         executed_at_utc=snapshot.executed_at,
     )
 
