@@ -1,4 +1,4 @@
-# SIMEC Backend
+# Sistema de información sobre monitoreo de mercados
 
 Backend asíncrono desarrollado en **FastAPI** bajo **arquitectura hexagonal (puertos y adaptadores)** para el monitoreo de mercados, consulta de proveedores del Estado y detección de conductas anticompetitivas.
 
@@ -62,7 +62,7 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 
    ```env
    # =====================================================================
-   # SIMEC Backend - Variables de entorno
+   # Variables de entorno
    # Copiar como .env y reemplazar los valores CAMBIAR. Nunca subir el .env a git.
    # =====================================================================
 
@@ -86,7 +86,7 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
    # --- Archivos generados (PDFs de SUNARP) ------------------------------
    FILES_DIR=files
    # URL pública del backend para armar enlaces a los PDFs detrás de un proxy
-   # (p.ej. https://simec.indecopi.gob.pe). Vacía = se usa la URL de la petición.
+   # (p.ej. https://servidor.ejemplo.gob.pe). Vacía = se usa la URL de la petición.
    PUBLIC_BASE_URL=
 
    # --- SUNARP (SPRL y Síguelo Plus) -------------------------------------
@@ -361,5 +361,5 @@ pip install -r requirements.txt ipykernel
 playwright install chromium
 
 # Vincular el entorno de Conda para que VS Code y Jupyter lo reconozcan
-python -m ipykernel install --user --name=simec-ocr --display-name="Python 3.11 (SIMEC-OCR)"
+python -m ipykernel install --user --name=simec-ocr --display-name="Python 3.11 (OCR)"
 ```

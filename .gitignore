@@ -51,3 +51,6 @@ storage_state.json
 
 # Snapshots y descargas del MCP de Playwright
 .playwright-mcp/
+
+# Entregables (Excel, Word, PDF): no se versionan
+anexos/

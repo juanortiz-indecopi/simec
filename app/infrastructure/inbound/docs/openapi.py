@@ -62,7 +62,7 @@ TAGS_METADATA: Final[list[dict[str, Any]]] = [
 ]
 
 API_METADATA: Final[dict[str, Any]] = {
-    "title": "SIMEC Backend",
+    "title": "Sistema de información sobre monitoreo de mercados",
     "version": "0.1.0",
     "summary": "API de monitoreo de proveedores y mercados",
     "description": DESCRIPTION,
