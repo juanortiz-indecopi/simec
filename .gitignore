@@ -45,3 +45,9 @@ files/
 *.har
 storage_state.json
 .claude/settings.local.json
+
+# Perfiles de Chrome (cookies y sesiones), trazas y caché local
+.cache/
+
+# Snapshots y descargas del MCP de Playwright
+.playwright-mcp/
