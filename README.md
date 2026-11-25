@@ -8,6 +8,9 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
 - **OECE / SEACE (Pentaho BI CDA):** Presencia en el RNP, vigencias, composición societaria (accionistas, representantes y órganos de administración) e historial de adjudicaciones y órdenes desde 2008.
 - **OSCE — RNP (Constancia):** Historial de inscripciones por capítulo (bienes y servicios), códigos de proveedor y números de trámite con resolución automatizada de CAPTCHA.
 - **APIS.NET.PE:** Pasarela rápida de validación de identidad (DNI) y padrón reducido (RUC).
+- **SUNARP (SPRL y Síguelo Plus):** Asientos de una partida registral y sus PDF.
+- **Instagram:** Perfil por username (sin login).
+- **Facebook:** Página de empresa, con comparación opcional contra un RUC (sin login).
 
 ---
 
@@ -96,6 +99,13 @@ El servicio actúa como un agregador y normalizador en tiempo real que extrae in
    # SUNARP_AGENT_PROFILE_DIR=.cache/sunarp_mcp_profile   (perfil de Chrome del agente)
    # SUNARP_PROFILE_DIR=.cache/sunarp_profile             (perfil del extractor clásico)
    # SUNARP_FILES_DIR=files/sunarp                        (carpeta de los PDFs)
+
+   # --- Instagram y Facebook (opcionales) ---------------------------------
+   # false = se ve la ventana del navegador (útil para depurar).
+   # INSTAGRAM_HEADLESS=true
+   # FACEBOOK_HEADLESS=true
+   # INSTAGRAM_FILES_DIR=files/instagram
+   # FACEBOOK_FILES_DIR=files/facebook
 
    # --- Modelo de lenguaje del agente SUNARP -----------------------------
    # Proveedor: openai | anthropic | google_genai | google_vertexai
@@ -294,11 +304,13 @@ Una vez iniciado el servidor, la documentación interactiva estará disponible e
 | Consolidada por **RUC** (11 dígitos) | `GET http://localhost:8000/api/v1/companies/{ruc}` | apis.net.pe, SEACE, SUNAT y RNP |
 | Consolidada por **DNI** (8 dígitos) | `GET http://localhost:8000/api/v1/persons/{dni}` | apis.net.pe, SEACE y SUNAT |
 | **Partida registral** (SUNARP) | `GET http://localhost:8000/api/v1/sunarp/partidas?oficina=CUSCO&area=Personas Juridicas&partida=11156404` | SPRL y Síguelo Plus (puede tardar varios minutos en vivo) |
+| **Perfil de Instagram** | `GET http://localhost:8000/api/v1/instagram/{username}` | Instagram |
+| **Página de Facebook** | `GET http://localhost:8000/api/v1/facebook/pages?page=codideep&ruc=20603687478` (`ruc` opcional) | Facebook y, con `ruc`, apis.net.pe y SUNAT |
 | Estado del servicio | `GET http://localhost:8000/api/v1/health` | API y conexión a PostgreSQL |
 
 El RNP solo admite consultas por RUC. Cada respuesta incluye `audit_entries` con la duración, el estado (`SUCCESS`, `NO_DATA` o `ERROR`) y el detalle de cada fuente, de modo que una fuente caída no bloquea a las demás.
 
-**Datos guardados y actualización:** los tres endpoints de consulta aceptan el parámetro `refresh`:
+**Datos guardados y actualización:** todos los endpoints de consulta aceptan el parámetro `refresh`:
 
 | Llamada | Comportamiento |
 |---|---|
@@ -312,6 +324,8 @@ La respuesta indica el origen de los datos con `served_from` (`DATABASE`, `LIVE`
 ```bash
 pytest -v
 ```
+
+Las pruebas no usan red ni base de datos.
 
 ### 4. Laboratorio de exploración (Jupyter Notebooks)
 
